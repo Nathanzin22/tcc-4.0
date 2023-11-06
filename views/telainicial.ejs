@@ -1,0 +1,16 @@
+ <%- include ("partials/header.ejs")%>
+<body>
+ <%- include ("partials/navbar.ejs")%>
+
+    <h2>TELA INICIAL, MANDA SALVEEEEEEEEEEEEEEEEEEEEEEE</h2>
+    
+    <form action="/users/telainicial" method="post">
+        <!-- Botão de Editar -->
+        <button type="button" onclick="window.location.href='/users/editaruser/ '">Editar</button>
+        
+        <!-- Botão de Deletar -->
+        <button type="button" onclick="window.location.href='/users/confirmardeletaruser'">Deletar</button>
+    </form>
+</body>
+<%- include ("partials/footer.ejs")%>
+

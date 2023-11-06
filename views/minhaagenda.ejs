@@ -1,0 +1,34 @@
+<%- include ("partials/header.ejs")%>
+<body>
+    <%- include ("partials/navbar.ejs")%> 
+    <%- include ("partials/load.ejs")%>
+    
+    <%- include ("partials/erro.ejs")%>
+    <%- include ("partials/sucess.ejs")%>
+    
+    <div class="container">
+        <h1 align="center">Minha Agendas</h1> <br>
+
+        <a href="/users/agenda" class="btn btn-primary">Criar Agenda</a>
+        <hr>
+        <%if(agenda.length >= 1) { %>
+
+        <%agenda.forEach((agenda)=>{ %>
+            <div class="card">
+                <div class="card-body">
+                <small>Data: <strong><%= agenda.data%></strong> </small> <br>
+                <small>Hora: <strong><%= agenda.horario%></strong> </small> <br>
+                <small>disponibilidade: <strong><%= agenda.disponibilidade%></strong> </small> <br>
+                 
+                <a href="/users/cunsultas/editar/<%= agenda.id%>" class="btn btn-success">Editar</a>
+                <a href="/users/cunsultas/deletar/<%= agenda.id%>" class="btn btn-danger">Eliminar</a>
+
+            </div>
+            </div>
+      <%  }) %>   
+         
+
+    <% } %>
+    </div>
+</body>
+<%- include ("partials/footer.ejs")%>

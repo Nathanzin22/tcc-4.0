@@ -1,0 +1,18 @@
+<!-- confirmardeletaruser.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Confirmar Exclusão</title>
+  <link rel="stylesheet" href="../estilos/deletaruser.css">
+</head>
+<body>
+  <h1>Confirmar Exclusão</h1>
+  <p>Você está prestes a excluir o usuário:</p>
+  <p>Nome: <%= usuario.nome %></p>
+  <p>CPF: <%= usuario.cpf %></p>
+  <form action="/deletaruser/<%= usuario.cpf %>" method="post">
+    <button type="submit">Confirmar Exclusão</button>
+  </form>
+  <a href="users/telainicial">Cancelar</a>
+</body>
+</html>

@@ -1,0 +1,416 @@
+
+<%- include ("partials/header.ejs")%>
+<style>
+  
+    #carousel-1{
+      
+         background-image: url("data:image/jpeg;base64,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");
+        background-repeat: no-repeat;
+       background-size: cover; 
+     
+         
+      
+    }
+     #carousel-2{
+      
+         background-image: url("https://letmebe.pt/wp-content/uploads/2023/02/17-02-23_1200x630.jpg");
+        background-repeat: no-repeat;
+       background-size: cover; 
+         
+      
+    }
+     #carousel-3{
+      
+         background-image: url("https://jacontabilidade.com.br/wp-content/uploads/2019/09/inscricao-para-o-curso-gratuito-de-cabeleireiro-do-dia-13-a-17-de-janeiro-5e186caca7d17.jpg");
+        background-repeat: no-repeat;
+       background-size: cover; 
+         
+      
+    }
+    #carousel-4{
+      background-image: url("https://s2.glbimg.com/ocHocqwvQu5K62Yzsi5XqYpiDEE=/e.glbimg.com/og/ed/f/original/2015/11/18/barbeiro_salao_e_bar.jpg");
+        background-repeat: no-repeat;
+       background-size: cover; 
+
+    }
+    
+    .titulo{
+         text-align: center;
+        margin: auto; 
+        
+    }
+    .hr{
+        border: solid red 1px;
+        width: 7rem;
+        height: 2rem;
+        background-color:red;
+        color: red;
+        margin: auto;
+    }
+    .servicos{
+      margin: 20px solid red;
+      background-color: rgba(110, 110, 110, 0.356);
+
+    }
+    .carousele{
+        color: #fff;
+        display: flex;
+        padding-left: 3rem;
+        padding-right: 3rem;
+         background-color: rgba(0, 255, 255, 0.459); 
+         height: 500px;
+         
+    }
+    
+</style>
+<body>
+  <%- include ("partials/load.ejs")%> 
+  <%- include ("partials/navbar.ejs")%> 
+  <%- include ("partials/erro.ejs")%>
+  <%- include ("partials/sucess.ejs")%>
+  
+  
+
+  
+
+<div id="carousel" class="carousel slide" data-bs-ride="carousel">
+   <div class="carousel-indicators"class="carousel-indicators">
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"  aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"  aria-label="Slide 3"></button>
+            </div>
+  <div class="carousel-inner">
+    <%if(user) { %>
+    <div class="carousel-item active" id="carousel-4">
+        
+      <div class="carousele">
+         <div class="titulo">
+            <h1>PORTAL DO PROFISSIONAL</h1>
+            <form   role="search" method="post" class="d-flex" action="/busca">
+              <select name="profissao" id="profissao" class="form-control">
+               
+                <% if(tag != null) { %> 
+                    <% tag.forEach((tag)=>{ %>
+                      <option value="<%=tag.profissao %>"><%=tag.profissao %></option>
+                   <% }) %>
+                <% } else {%>
+                  <option value="">Sem Agenda</option>
+                <%} %>
+                 
+                </select>
+                <button class="btn btn-success" type="submit"  >Search</button>
+            </form>
+         </div>
+           
+      </div>
+    </div>
+<% }else{ %>
+
+    
+    <div class="carousel-item active" id="carousel-1">
+        
+      <div class="carousele">
+         <div class="titulo">
+            <h1>cabeleireiros excelentes!</h1>
+            <p> Descubra e reserve profissionais de beleza perto de ti</p>
+            <form   role="search" method="post" class="d-flex" action="/busca">
+              <select name="profissao" id="profissao" class="form-control">
+               
+                <% if(tag.length>0) { %> 
+                    <% tag.forEach((tag)=>{ %>
+                      <option value="<%=tag.profissao %>"><%=tag.profissao %></option>
+                   <% }) %>
+                <% } else {%>
+                  <option value="">Sem Agenda</option>
+                <%} %>
+                 
+                </select>
+                <button class="btn btn-success" type="submit"  >Search</button>
+            </form>
+            
+         </div>
+           
+      </div>
+    </div>
+    <div class="carousel-item " id="carousel-2">
+        
+      <div class="carousele">
+         <div class="titulo">
+            <h1>Encontre e faça agendamento</h1>
+            <p>Descubra e reserve profissionais de beleza perto de ti</p>
+          
+            <form   role="search" method="post" class="d-flex" action="/busca">
+              <select name="profissao" id="profissao" class="form-control">
+               
+                <% if(tag.length>0 ) { %> 
+                    <% tag.forEach((tag)=>{ %>
+                      <option value="<%=tag.profissao %>"><%=tag.profissao %></option>
+                   <% }) %>
+                <% } else {%>
+                  <option value="0">Sem Agenda</option>
+                <%} %>
+                 
+                </select>
+                <button class="btn btn-success" type="submit"  >Search</button>
+            </form>
+            
+         </div>
+           
+      </div>
+    </div>
+    <div class="carousel-item" id="carousel-3">
+        
+      <div class="carousele">
+         <div class="titulo">
+            <h1>Simplifique Já</h1>
+            <p>Com o uso de um sistema online, você pode automatizar esse processo, economizando seu trabalho manual ou da sua equipe.</p>
+            <form   role="search" method="post" class="d-flex" action="/busca">
+              <select name="profissao" id="profissao" class="form-control">
+               
+                <% if(tag.length>0) { %> 
+                    <% tag.forEach((tag)=>{ %>
+                      <option value="<%=tag.profissao %>"><%=tag.profissao %></option>
+                   <% }) %>
+                <% } else {%>
+                  <option value="">Sem Agenda</option>
+                <%} %>
+                 
+                </select>
+                <button class="btn btn-success" type="submit"  >Search</button>
+            </form>
+            
+         </div>
+           
+      </div>
+    </div>
+    <% }%>
+     
+  </div>
+</div><br>
+<!-- Button trigger modal -->
+<% if(profissao != null) {%>
+ 
+<div class="container">
+  <br>
+  
+  <h3>Resultado da Pesquisa</h3>
+  <hr>
+    <div class="row justify-content-sm-center">
+      <% if(profissao.length > 0){ %>
+      <% profissao.forEach((profissao)=> {  %> 
+        <div class="col-sm-6 col-md-6">
+            <div class="card mb-5" >
+               
+            <div class="card-body">  
+              <% if(profissao.disponibilidade == true){ %>
+                <h4>Agenda <strong class="alert-success">Aberta</strong> </h4> <br>
+              <% }else { %>
+                <h4>Agenda <strong class="alert-danger">Fechada</strong> </h4> <br>
+              <% } %>
+              <% if(profissao.horario >'17:59:00'){ %>
+                <p>disponibilidade: <strong  class="alert-primary">Noite</strong></p> 
+              <% }else if(profissao.horario >'11:59:00'){ %>
+               <p>disponibilidade: <strong  class="alert-primary">Tarde</strong></p> 
+              <% }else {%>
+                <p>disponibilidade: <strong  class="alert-primary">Manhã</strong></p> 
+              <% } %>
+              <small>Data: <strong><%=profissao.data %></strong></small> <br>
+              
+              <small>horas: <strong><%=profissao.horario%></strong> </small>
+             
+              <br>  
+              <a   class="btn btn-outline-success" type="submit" href="/reservar/<%=profissao.id%>/<%=profissao.user_id%>">Reservar</a>
+            </div>
+            
+            
+         
+        </div>
+        </div>
+      
+        <% }) %>
+        <% } else { %>
+          <p>Nenhuma Agenda disponivel</p>
+     <% }%>
+      </div>
+    
+  </div>
+
+  
+<!-- Modal -->
+
+  <%}else { } %>
+<div class="jumbotron mt-4" id="corpo">
+
+
+ <%if(user) { %>
+<h2 class="text-center display-6" id="sobre">Dica importantes</h2>
+<span></span>
+
+<% }else { %>
+    <div class="servicos">
+        <div class="container mt-4">
+          <br> <br>
+        <h2 class="text-center display-10" id="servico">Top dos profissionais <Strong>Recomendados</Strong> </h2>
+        <hr class="hr"><br>
+        <h5 class="card_title" align="center">Reserve com os melhores profissionais, perto de você</h5>
+        <br> 
+      
+         <div class="row justify-content-sm-center">
+          <% if(buscarfoto.length >= 1){   %>
+
+              <% buscarfoto.forEach((foto)=>{ %>
+                <div class="col-sm-6 col-md-6">
+                  <div class="card mb-5" >
+                      <img src="/foto/<%=foto.nome %>" class="card-img-top"  width="300" height="300">
+                  <div class="card-body">  
+                    <%  array.forEach((user)=>{%>
+                      <% if(user.id === foto.user_id){ %>
+                        <h4 class="card_title" ></h4>
+                    <small><%=user.nome%></small> <br>
+                    <small>profissional  <strong><%=user.profissao%></strong> </small> <br>
+                    <small>Contacto <strong><%=user.telefone%></strong> </small>
+
+                     <%  } %>
+                      
+                 <%  })%>
+                    
+                    <br>  
+                    <Strong>Agendas: </Strong>
+                    <%  novoArray.forEach((user)=>{%>
+                      <% if(user.disponibilidade === true){ %>
+                      <% if(user.user_id === foto.user_id){ %>
+                    
+                    <a   class="btn btn-outline-success" type="submit" href="/reservar/<%=user.id %>/<%=user.user_id%>">Aberta</a>
+                    <%  } %>
+                    <%  }else { %>
+                      <a   class="btn btn-outline-danger" type="submit" href="#">Fechada</a>
+                  <%  } %>
+                      
+                 <%  })%>
+                  </div>
+                  
+  
+               
+              </div>
+              </div>
+              <% }) %>
+          
+       <%   }else { %>
+
+          
+        
+                
+                <div class="col-sm-6 col-md-6">
+                    <div class="card mb-5" >
+                        <img src="https://malucellidotlive.files.wordpress.com/2019/06/barbearia_expertjockey_rodrigotorrezan1.jpeg?w=1100&h=550&crop=1" class="card-img-top">
+                    <div class="card-body">  
+                      <h4 class="card_title" >beaber will</h4>
+                      <small>Sao paulo rua da igreja azul</small> <br>
+                      <small>disponivel  <strong>24horas</strong> </small>
+                      <br>  
+                      <a href="#"  class="btn btn-outline-success" type="button">Reservar</a>
+                    </div>
+                    
+    
+                 
+                </div>
+                </div> <div class="col-sm-6 col-md-6" >
+                    <div class="card mb-5" >
+                        <img src="https://malucellidotlive.files.wordpress.com/2019/06/barbearia_expertjockey_rodrigotorrezan1.jpeg?w=1100&h=550&crop=1" class="card-img-top">
+                    <div class="card-body">  
+                      <h4 class="card_title" >beaber will</h4>
+                      <small>Sao paulo rua da igreja azul</small> <br>
+                      <small>disponivel  <strong>24horas</strong> </small>
+                      <br>  
+                      <a href="#"  class="btn btn-outline-success" type="button">Reservar</a>
+                    </div>
+                    
+    
+                 
+                </div>
+                 
+                </div> <div class="col-sm-6 col-md-6">
+                    <div class="card mb-5" >
+                        <img src="https://malucellidotlive.files.wordpress.com/2019/06/barbearia_expertjockey_rodrigotorrezan1.jpeg?w=1100&h=550&crop=1" class="card-img-top">
+                    <div class="card-body">  
+                      <h4 class="card_title" >beaber will</h4>
+                      <small>Sao paulo rua da igreja azul</small> <br>
+                      <small>disponivel  <strong>24horas</strong> </small>
+                      <br>  
+                      <a href="#"  class="btn btn-outline-success" type="button">Reservar</a>
+                    </div>
+                    
+    
+                 
+                </div>
+                </div>
+              <% } %>
+            </div>
+            </div>
+            </div>
+
+    <div class="container mt-4">
+
+
+       <h2 class="text-center display-6" id="sobre">Quem Somos</h2>
+<hr class="hr">
+  <br>
+  <div class="row justify-content-center">
+            <div class="  col-md-8">
+                  <img src="https://images.fresha.com/locations/location-profile-images/736263/796725/b320cba5-d5d6-4a93-8510-a6777c414f56.jpg" alt="foto1" width="500">
+                  
+            </div>
+           
+            <p class="text-justify col-md-4">
+                <br><br>
+                Procurando seu próximo serviço a ser agendado na barbearia, no cabeleireiro, na massagista ou na manicure? Precisa agendar um horário para fazer a barba, tirar as sobrancelhas ou fazer uma massagem? <br> <br>
+                O {nome do site} é uma plataforma online que torna fácil e prático o processo de encontrar estabelecimentos, profissionais, serviços e realizar seus agendamentos. Reserve a qualquer hora, em qualquer lugar, 24 horas por dia, 7 dias por semana.
+                   
+            
+            </p>
+            
+        
+        </div>
+   </div>
+   
+  
+        <br><br>
+        <h2 class="text-center display-10" id="vantagens">Vantagens do <Strong>nossa plataforma</Strong> </h2>
+<hr class="hr"><br>
+<% } %>
+        <div class="container">
+          <div class="card mt-3">
+        <div class="card-body">
+            
+        <h5 lang="display-4">Utentes</h5>
+        <ol>
+         <li>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, eius quae repudiandae, explicabo dignissimos blanditiis quis debitis rerum beatae consequatur voluptatum eligendi dolores libero laudantium maiores at omnis recusandae officiis.</p>
+         </li>
+        
+    </ol>
+    </div>
+    </div>
+     <div class="card mt-3">
+        <div class="card-body">
+            
+        <h5 lang="display-4">profissional</h5>
+        <ol>
+
+        <li>
+            <p>Você trabalha 24 horas por dia? Certamente não. Com um sistema online, seus clientes podem agendar horários em sua barbearia a qualquer hora, seja sábado, domingo ou em dias úteis. Com isso, sua barbearia pode se concentrar no que é essencial: corte de barbas e cabelos, já que o agendamento não depende de ligações telefônicas.</p>
+        </li>
+         
+        
+    </ol>
+    </div>
+    </div>
+        </div> 
+        
+        
+  
+
+</div>
+</body>
+<%- include ("partials/footer.ejs")%>

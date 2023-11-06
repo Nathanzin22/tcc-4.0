@@ -1,0 +1,76 @@
+<%- include ("partials/header.ejs")%>
+<style>
+  .fundo{
+       background-color: rgba(122, 177, 223, 0.692);
+      color: white;
+       height: 685px;
+       width: 101.9%;;
+  }
+   
+   #body{
+  padding: 0;
+  margin: 0;
+  }
+   
+   
+</style>
+<body>
+  
+
+  <%- include ("partials/navbar.ejs")%> 
+  <%- include ("partials/load.ejs")%>
+  
+  <%- include ("partials/erro.ejs")%>
+  <%- include ("partials/sucess.ejs")%>
+<br> <br>
+<% if(erros.length > 0) { %>
+  <% erros.forEach(function(erros){ %>
+  
+    <div class="alert alert-danger">
+      <p slign="center"><%= erros.text %></p>
+    </div>
+ <% }) %>
+
+<%} else {%>
+ 
+ <%}%> 
+
+<div class="row justify-content-sm-center" id="body">
+    
+   <div class="col-sm-6 col-md-6">
+       
+
+    <div class="card card mb-3">
+     <div class="card-body">
+        <h3 align="center">Criar uma Conta</h3>
+       <form action="/users/users", method="POST">
+           <label for="nome">Nome :</label>
+           <input type="text" name="nome" class="form-control" id="nome" >
+           <label for="cpf">CPF:</label>
+           <input type="text" name="cpf" class="form-control" >
+           <label for="profissao">Profissão:</label>
+           <input type="text" name="profissao" class="form-control"  >
+           <label for="telefone">telefone</label>
+           <input name="telefone" id="telefone" class="form-control" type="text">
+           <label for="email">Email</label>
+           <input type="email" name="email" class="form-control"  >
+           <label for="senha">Senha</label>
+           <input type="password" name="senha" class="form-control" id="senha">
+           <label for="senha2">Repita a sua Senha</label>
+           <input type="password" name="senha2" class="form-control">
+           
+           
+           <button type="submit" class="btn btn-success mt-3" align="center">Criar Conta</button>
+           
+
+       </form>
+       <a type="button" href="/users/login" class="nav-link" align="center">Já tem conta?</a>
+   </div>
+       </div>
+       
+   </div>
+
+
+</div>
+</body>
+<%- include ("partials/footer.ejs")%>

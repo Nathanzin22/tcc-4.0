@@ -1,0 +1,45 @@
+<%- include ("partials/header.ejs")%>
+<body>
+    <%- include ("partials/navbar.ejs")%> 
+    <%- include ("partials/load.ejs")%>
+    
+    <%- include ("partials/erro.ejs")%>
+    <%- include ("partials/sucess.ejs")%>
+    
+    <div class="container">
+        <br>
+    <h1 class="text-center display-6 mt-5">Agenda de trabalho</h1><br>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero beatae fuga quasi aliquam dolore rem praesentium! Expedita, repellat veniam. Beatae minus magni vitae quisquam quo maiores est voluptatibus obcaecati similique.</p>
+    
+    <div class="card mt-4">
+        <div class="card-body">
+            <h3>Preencher os dados</h3> <br>
+            <div class="" style="width: 60%; margin: auto;">
+           <div class="container" >
+            <form action="/users/agenda" method="POST">
+                
+                <label for="data">Agendar o dia </label>
+                <input name="data" type="date" class="form-control" required> <br>
+                <label for="horario">Agendar a hora</label>
+                <input name="horario" type="time" class="form-control" required> <br>
+                <label for="disponibilidade">Selecione a Disponibilidade</label>
+                <select name="disponibilidade" class="form-control">
+                   <option value="1">Aberto</option>
+                  <option value="0">Fechado</option>
+                  
+                </select>
+               <br>
+               <button class="btn btn-success" type="submit">Agendar</button>
+               <a class="btn alert-danger" href="/" type="button
+               ">Cancelar</a>
+           </form>
+           </div>
+        </div>
+            
+        </div>
+    </div>
+    
+    
+    </div>
+</body>
+<%- include ("partials/footer.ejs")%>
