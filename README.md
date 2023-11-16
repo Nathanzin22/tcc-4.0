@@ -1,7 +1,6 @@
 # Como Rodar  o Projecto usando npm
 
 Bem-vindo ao guia de configuração e execução do Projecto! Este arquivo README fornecerá instruções passo a passo sobre como configurar e executar a  Projecto com  o npm. Certifique-se de seguir todas as etapas para garantir um processo tranquilo.
-**Atenção** pelo pedido do cliente não apliquei nenhum padrão de arquitetura de projeto.
 
 ## Requisitos
 
@@ -9,7 +8,6 @@ Antes de começar, certifique-se de ter o seguinte instalado em seu sistema:
 
 1. **Node.js e npm**: Certifique-se de ter o Node.js (já que ele inclui o npm) instalado. Você pode baixar a versão mais recente em https://nodejs.org/.
 
- 
 
 3. **Postgres**: Certifique de ter o postgres instalado na sua maquina e saber a palavra passe
 ## Configurando o Ambiente
@@ -45,6 +43,5 @@ Para encerrar a execução, volte para o terminal onde você iniciou  e pression
 
 Lembre-se de que este é um guia básico para configurar e executar o projecto usando npm. 
 
-Divirta-se explorando  o projecto! Se você tiver alguma dúvida ou encontrar algum problema, não hesite em consultar a documentação de instalação do projeto.
 
 
