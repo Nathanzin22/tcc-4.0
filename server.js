@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const session = require('express-session');
+const MemoryStore = require('memorystore')(session);
 const bcrypt = require("bcryptjs")
 const passport = require("passport")
 const flash = require("connect-flash")
@@ -37,8 +38,11 @@ app.use(express.json());
 app.use(session({
   secret: "agenda",
   resave: true,
-  saveUninitialized: true
-  
+  saveUninitialized: true,
+  cookie: { maxAge: 86400000 },
+  store: new MemoryStore({
+    checkPeriod: 86400000
+  }),
 }))
  
 app.use(passport.initialize())
