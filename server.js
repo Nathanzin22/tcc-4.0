@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 10000;
 const path = require('path');
 const session = require('express-session');
 const MemoryStore = require('memorystore')(session);
