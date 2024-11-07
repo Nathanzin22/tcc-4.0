@@ -80,7 +80,6 @@ router.post("/agenda/editar", async (req, res) => {
 })
 //rotas de perfil
 router.get("/perfil/:id", async (req, res) => {
-  console.log(req.user)
   const {id} = req.user
   var idi = req.params.id
   const foto = await fotoDao.buscar(id)
@@ -174,7 +173,7 @@ router.get("/reservas", async (req, res) => {
   let datanow = Date()
   let hoje = `${datanow[8]}${datanow[9]}/${datanow[4]}${datanow[5]}${datanow[6]}`
   const dataDays = await finalizado.findByDate(hoje)
-  console.log(dataDays.length, hoje)
+
   res.render("clientereserva",
     {
       data,
@@ -198,7 +197,6 @@ router.post("/perfil/foto", upload.single('foto'), async (req, res) => {
   const {id} = req.user
   const nome = req.body.nome
   
-  console.log(nome)
   const foto = {
     nome: req.file.filename,
     user_id: id
@@ -218,16 +216,13 @@ router.post('/users', async (req, res) => {
     const cpf = req.body.cpf.replace(/\D/g, ''); // Remove pontos e traços
     
     if (!req.body.nome || req.body.nome == null || req.body.nome == undefined) {
-      console.log("nome")
       erros.push({text: "Digite nome completo"})
     }
     if (!cpf || cpf == null || cpf == undefined) {
-      console.log("cpf")
       erros.push({text: "Digite número do CPF"})
     }
     
     if (!req.body.email || req.body.email == null || req.body.email == undefined) {
-      console.log("email")
       erros.push({text: "Digite o E-mail"})
     }
     if (req.body.senha.length < 6) {
@@ -237,7 +232,6 @@ router.post('/users', async (req, res) => {
       erros.push({text: "O CPF deve ter exatamente 11 dígitos"})
     }
     if (req.body.senha2 != req.body.senha) {
-      console.log("senha2")
       erros.push({text: "Senhas diferentes"})
     }
     
@@ -259,7 +253,7 @@ router.post('/users', async (req, res) => {
         bcrypt.genSalt(10, (erro, salt) => {
           bcrypt.hash(newUser.senha, salt, async (erro, hash) => {
             if (erro) {
-              console.log("Houve um erro ao gerar o hash da senha");
+              console.error("Houve um erro ao gerar o hash da senha");
               res.redirect("/");
             }
             newUser.senha = hash;
@@ -268,7 +262,7 @@ router.post('/users', async (req, res) => {
               res.redirect('/users/login');
             }).catch((err) => {
               req.flash("error_msg", "Erro ao salvar o usuário");
-              console.log("Erro ao salvar no banco: " + err);
+              console.error("Erro ao salvar no banco: " + err);
             });
           });
         });
@@ -294,7 +288,7 @@ router.get('/confirmardeletaruser/:cpf', async (req, res) => {
 
 router.post("/editar", (req, res) => {
   const id = req.body.id
-  console.log(id)
+
   const user = {
     nome: req.body.nome,
     cpf: req.body.cpf.replace(/\D/g, ''),
@@ -328,7 +322,6 @@ router.post("/redefinir/senha", async (req, res) => {
               res.redirect("/")
             }
             senhaNova = hash;
-            console.log(senhaNova)
             await userDao.editarSenha(senhaNova, id).then(() => {
               req.flash("success_msg", "Conta criada editada sucesso")
               
@@ -398,7 +391,7 @@ router.post('/autenticacao', async (req, res) => {
     const user = await userDao.authenticate(username, password);
     if (user) {
       req.session.user = user;
-      console.log('Dados da sessão:', req.session.user);
+
       res.redirect('/users/telainicial');
     } else {
       res.status(401).send('Nome de usuário ou senha incorretos.');
@@ -426,7 +419,7 @@ router.post("/agenda", async (req, res) => {
     await agendaDao.salvar(newAgenda)
     res.redirect("/users/cunsultas")
   } catch (error) {
-    console.log("error ", error)
+    console.error("error ", error)
   }
 })
 
