@@ -1,8 +1,6 @@
-
 <div class="container">
-    
-    <%if (success_msg.length >=1) { %>
-        <div class="alert alert-success mt-1"><%=success_msg %></div>
-    <%} else {  } %>
-     
-    </div>
+    <% if (success_msg.length >= 1) { %>
+    <div class="alert alert-success mt-1"><%= success_msg %></div>
+    <% } else {
+    } %>
+</div>

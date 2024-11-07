@@ -1,59 +1,59 @@
-<%- include ("partials/header.ejs")%>
+<%- include ("partials/header.ejs") %>
 <style>
-    .fundo{
-         background-color: rgba(122, 177, 223, 0.692);
+    .fundo {
+        background-color: rgba(122, 177, 223, 0.692);
         color: white;
-         height: 505px;
-         width: 101.9%;;
+        height: 505px;
+        width: 101.9%;;
     }
-    
-    #body{
-    padding: 0;
-    margin: 0;
-    }
-     
-     
- </style>
- <body>
-    <%- include ("partials/navbar.ejs")%> 
-    <%- include ("partials/load.ejs")%>
-    
-    <%- include ("partials/erro.ejs")%>
-    <%- include ("partials/sucess.ejs")%>
 
- <br>
- <br>
- <div class="row justify-content-sm-center" id="body">
-     
-     <div class="col-sm-6 col-md-6 ">
-         
- 
-      <div class="card card mb-3  ">
-       <div class="card-body">
-          
- 
-          <h3 align="center">Login</h3>
-          <div class="mt-5"></div>
-         <form action="/login", method="POST">
-              
-             <label for="nome">Email do Usuário::</label>
-             <input type="text" name="email" class="form-control" id="email">
-              
-             <label for="senha">Senha</label>
-             <input type="password" name="senha" class="form-control" >
-             
-             
-             <button type="submit" class="btn btn-success mt-3" align="center">Entrar</button>
-             
- 
-         </form>
-         <a type="button" href="/users/cadastrouser" class="nav-link" align="center">Não tem conta?</a>
-     </div>
-         </div>
-         
-     </div>
- 
- 
- </div>
+    #body {
+        padding: 0;
+        margin: 0;
+    }
+
+
+</style>
+<body>
+<%- include ("partials/navbar.ejs") %>
+<%- include ("partials/load.ejs") %>
+
+<%- include ("partials/erro.ejs") %>
+<%- include ("partials/sucess.ejs") %>
+
+<br>
+<br>
+<div class="row justify-content-sm-center" id="body">
+
+    <div class="col-sm-6 col-md-6 ">
+
+
+        <div class="card card mb-3  ">
+            <div class="card-body">
+
+
+                <h3 align="center">Login</h3>
+                <div class="mt-5"></div>
+                <form action="/login" , method="POST">
+
+                    <label for="nome">Email do Usuário::</label>
+                    <input type="text" name="email" class="form-control" id="email">
+
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" class="form-control">
+
+
+                    <button type="submit" class="btn btn-success mt-3" align="center">Entrar</button>
+
+
+                </form>
+                <a type="button" href="/users/cadastrouser" class="nav-link" align="center">Não tem conta?</a>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
 </body>
-<%- include ("partials/footer.ejs")%>
+<%- include ("partials/footer.ejs") %>

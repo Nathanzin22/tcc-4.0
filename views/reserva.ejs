@@ -1,37 +1,37 @@
-<%- include ("partials/header.ejs")%>
+<%- include ("partials/header.ejs") %>
 <body>
-    <%- include ("partials/navbar.ejs")%> 
-    <%- include ("partials/load.ejs")%>
-    
-    <%- include ("partials/erro.ejs")%>
-    <%- include ("partials/sucess.ejs")%>
-    
+<%- include ("partials/navbar.ejs") %>
+<%- include ("partials/load.ejs") %>
+
+<%- include ("partials/erro.ejs") %>
+<%- include ("partials/sucess.ejs") %>
+
 <div class="container">
     <h1 align="center" class="mt-5">Reservar </h1>
-<hr>
-<div class="body">
-    <div class="card-body">
-        <form action="/reservar" method="post">
-            <label for="nome">Digite Nome</label>
-            <input type="text" class="form-control" name="nome">
-            <label for="telefone">Digite o Contato</label>
-            <input type="text" class="form-control" name="telefone">
-            <h5 class="mt-1">Dados da Reserva</h5>
-            <input type="hidden" value='<%=id.data%>' name="data">
-            <input type="hidden" value='<%=id.id%>' name="id">
-            <input type="hidden" value="<%=id.horario%>" name="horario">
-            <input type="hidden" value="<%=user_id.id %>" name="user_id">
-            
-            <hr>
-            <small>Profissional: <Strong><%=user_id.nome %></Strong></small> <br>
-            <small>Horas: <strong><%=id.horario%> </strong> </small><br>
-            <small>Reserva para o Dia: <strong><%=id.data%> </strong></small> <br>
-            <button class="btn btn-success mt-2">Continuar</button>
-            
-            <a href="/" class="btn alert-danger mt-2">Cancelar</a>
-        </form>
+    <hr>
+    <div class="body">
+        <div class="card-body">
+            <form action="/reservar" method="post">
+                <label for="nome">Digite Nome</label>
+                <input type="text" class="form-control" name="nome">
+                <label for="telefone">Digite o Contato</label>
+                <input type="text" class="form-control" name="telefone">
+                <h5 class="mt-1">Dados da Reserva</h5>
+                <input type="hidden" value='<%= id.data %>' name="data">
+                <input type="hidden" value='<%= id.id %>' name="id">
+                <input type="hidden" value="<%= id.horario %>" name="horario">
+                <input type="hidden" value="<%= user_id.id %>" name="user_id">
+
+                <hr>
+                <small>Profissional: <Strong><%= user_id.nome %></Strong></small> <br>
+                <small>Horas: <strong><%= id.horario.substring(0, 5) %> </strong> </small><br>
+                <small>Reserva para o Dia: <strong><%= new Date(id.data).toLocaleDateString('pt-BR') %> </strong></small> <br>
+                <button class="btn btn-success mt-2">Continuar</button>
+
+                <a href="/" class="btn alert-danger mt-2">Cancelar</a>
+            </form>
+        </div>
     </div>
 </div>
-</div>
 </body>
-<%- include ("partials/footer.ejs")%>
+<%- include ("partials/footer.ejs") %>

@@ -1,164 +1,164 @@
-<%- include ("partials/header.ejs")%>
- 
+<%- include ("partials/header.ejs") %>
+
 <body>
-    <%- include ("partials/navbar.ejs")%> 
-    <%- include ("partials/load.ejs")%>
-    
-    <%- include ("partials/erro.ejs")%>
-    <%- include ("partials/sucess.ejs")%>
+<%- include ("partials/navbar.ejs") %>
+<%- include ("partials/load.ejs") %>
 
-    <div class="container">
-        <br>
-         <br>
-        <br>
-        <% if( dataDayslength>0 ) {%>
+<%- include ("partials/erro.ejs") %>
+<%- include ("partials/sucess.ejs") %>
 
-            <button  class="btn btn-outline-primary mt-1" data-bs-target="#exampleModal" data-bs-toggle="modal"">Export Relatório</button>
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <% if( dataDayslength > 0 ) { %>
 
-        <%}else{ %>
-            <p>Nenhum Relatório</p> 
-        <%}%>
-         
-        <div class="card">
-            <div class="card-header">
-                <h2 class="mt-2">Compromisso Pendente</h2>
-            </div>
-            <div class="card-body" id="dados1">
-                <% if(data.length> 0) { %>
-                    <% data.forEach((data)=>{ %>
-                    
-                        <small> Nome: <strong><%=data.nome%></strong> </small> <br>
-                        <small> Telefone: <strong> <%=data.telefone%></strong></small> <br>
-                        <small> data: <strong><%=data.data%></strong> </small> <br> 
-                        <small> Horario: <strong><%=data.horario%></strong> </small> <br>
-                   
-                        <form action="/users/reservas/atender/" method="post">
-                            <input type="hidden" name="nome" value="<%=data.nome%>">
-                            <input type="hidden" name="telefone" value="<%=data.telefone%>">
-                            <input type="hidden" name="data" value="<%=data.data%>">
-                            <input type="hidden" name="horario" value="<%=data.horario%>">
-                            <input type="hidden" name="id" value="<%=data.id%>">
+        <button class="btn btn-outline-primary mt-1" data-bs-target="#exampleModal" data-bs-toggle="modal"">Export
+        Relatório</button>
 
-                            
+    <% }else{ %>
+        <p>Nenhum Relatório</p>
+    <% } %>
 
-                        <button class="btn alert-success mt-2" type="submit">Atender</button>
-
-                        </form>
-                        
-
-                        <a class="btn alert-danger mt-2" href="/users/reservas/deletar/<%=data.id%>" >Eliminar</a>
-                        <hr>
-                  <%  }) %>
-                <% } else {%>
-                    <h4>Sem Compromisso</h4>
-                <% }%>
-            </div>
+    <div class="card">
+        <div class="card-header">
+            <h2 class="mt-2">Compromisso Pendente</h2>
         </div>
-        <div class="card"  >
-            <div class="card-header">
-                <h2 class="mt-2">Compromisso Finalizado</h2>
-            </div>
-            <div class="card-body" id="dados">
-                <% if( dataDayslength>0) { %>
-                    <% finalizados.forEach((data)=>{ %>
-                         
-                        <small> Nome: <strong><%=data.nome%></strong> </small> <br>
-                        <small> Telefone: <strong> <%=data.telefone%></strong></small> <br>
-                        <small> data: <strong><%=data.data%></strong> </small> <br> 
-                        <small> Horario: <strong><%=data.horario%></strong> </small> <br>
-                        <p class="btn alert-success mt-4">Atendido</p>
-                    
+        <div class="card-body" id="dados1">
+            <% if(data.length > 0) { %>
+                <% data.forEach((data)=>{ %>
 
-                        <a class="btn alert-danger mt-2" href="/users/reservas/deletar2/<%=data.id%>">Eliminar</a>
-                        <hr>
-                  <%  }) %>
-                <% } else {%>
-                    <h4>Vazio</h4>
-                <% }%>
-            </div>
+                <small> Nome: <strong><%= data.nome %></strong> </small> <br>
+                <small> Telefone: <strong> <%= data.telefone %></strong></small> <br>
+                <small> data: <strong><%= data.data %></strong> </small> <br>
+                <small> Horario: <strong><%= data.horario %></strong> </small> <br>
+
+                <form action="/users/reservas/atender/" method="post">
+                    <input type="hidden" name="nome" value="<%= data.nome %>">
+                    <input type="hidden" name="telefone" value="<%= data.telefone %>">
+                    <input type="hidden" name="data" value="<%= data.data %>">
+                    <input type="hidden" name="horario" value="<%= data.horario %>">
+                    <input type="hidden" name="id" value="<%= data.id %>">
+
+
+                    <button class="btn alert-success mt-2" type="submit">Atender</button>
+
+                </form>
+
+
+                <a class="btn alert-danger mt-2" href="/users/reservas/deletar/<%= data.id %>">Eliminar</a>
+                <hr>
+                <% }) %>
+            <% } else { %>
+                <h4>Sem Compromisso</h4>
+            <% } %>
         </div>
-       
     </div>
-    <!-- Modal -->
+    <div class="card">
+        <div class="card-header">
+            <h2 class="mt-2">Compromisso Finalizado</h2>
+        </div>
+        <div class="card-body" id="dados">
+            <% if( dataDayslength > 0) { %>
+                <% finalizados.forEach((data)=>{ %>
+
+                <small> Nome: <strong><%= data.nome %></strong> </small> <br>
+                <small> Telefone: <strong> <%= data.telefone %></strong></small> <br>
+                <small> data: <strong><%= data.data %></strong> </small> <br>
+                <small> Horario: <strong><%= data.horario %></strong> </small> <br>
+                <p class="btn alert-success mt-4">Atendido</p>
+
+
+                <a class="btn alert-danger mt-2" href="/users/reservas/deletar2/<%= data.id %>">Eliminar</a>
+                <hr>
+                <% }) %>
+            <% } else { %>
+                <h4>Vazio</h4>
+            <% } %>
+        </div>
+    </div>
+
+</div>
+<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        
-        <div class="modal-body">
-            <button class="btn btn-success" onclick="gerarPdfAnalitico()">Gerar Relatório Analitico</button>
-            <button class="btn btn-sucess" onclick="gerarPdfQuantitativo()">Gerar Relatório Quantitativo</button>
-          
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <button class="btn btn-success" onclick="gerarPdfAnalitico()">Gerar Relatório Analitico</button>
+                <button class="btn btn-sucess" onclick="gerarPdfQuantitativo()">Gerar Relatório Quantitativo</button>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+            </div>
+
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            
-          </div>
-       
-      </div>
     </div>
-  </div>
-  
+</div>
+
 </body>
 <script>
-    //relatorio analitico e quantitativo
-    //a quatidade de atendimento feito naquele dia
-    gerarPdfAnalitico = function(){
-        var pegar = document.getElementById("dados").innerHTML
-        var pegar1 = document.getElementById("dados1").innerHTML
+  //relatorio analitico e quantitativo
+  //a quatidade de atendimento feito naquele dia
+  gerarPdfAnalitico = function () {
+    var pegar = document.getElementById("dados").innerHTML
+    var pegar1 = document.getElementById("dados1").innerHTML
 
-        var janela = window.open('', '','width=1000, height=600')
-        janela.document.write("<small><Strong>Dados do Profissional </Strong></small>")
-        janela.document.write("<br> <small><%=user.nome%> </small> <br> <small><%=user.profissao%> </small><hr>")
-        janela.document.write("<h1 align='center'>Relatório de Atendimento Analitico </h1> ");
-        
-        janela.document.write("<p> Atendimento Diário </p> <hr style='border: 2px black solid;'>  ");
-        janela.document.write("<table width=1000>")
-        janela.document.write("<tr style=' align-content: space-between;'>")
-        janela.document.write("<td><strong>DATA</strong></td>")
-        janela.document.write("<td align='center'> <strong>CLIENTE</strong></td>")
+    var janela = window.open('', '', 'width=1000, height=600')
+    janela.document.write("<small><Strong>Dados do Profissional </Strong></small>")
+    janela.document.write("<br> <small><%= user.nome %> </small> <br> <small><%= user.profissao %> </small><hr>")
+    janela.document.write("<h1 align='center'>Relatório de Atendimento Analitico </h1> ");
 
-        janela.document.write("</tr>")
-        janela.document.write("<tr style=' align-content: space-between;'>")
-        janela.document.write("<td> <%=hoje%> </td>")
-        
-        janela.document.write("<td > <% dataDay.forEach((dataDay)=> { %>")
-        janela.document.write("<p align='center'><%=dataDay.nome %></p>")
-        janela.document.write("<%})%> </td> </tr>")
-            
-        janela.document.write("</table>")
-       
-        janela.document.write("<hr style='border: 2px black solid;'> <br> <br> <br> <p>Processsado por Computador em <%=datanow%>")
-        
-        janela.print()
-    }
-    gerarPdfQuantitativo= function(){
-        var pegar = document.getElementById("dados").innerHTML
-        var pegar1 = document.getElementById("dados1").innerHTML
+    janela.document.write("<p> Atendimento Diário </p> <hr style='border: 2px black solid;'>  ");
+    janela.document.write("<table width=1000>")
+    janela.document.write("<tr style=' align-content: space-between;'>")
+    janela.document.write("<td><strong>DATA</strong></td>")
+    janela.document.write("<td align='center'> <strong>CLIENTE</strong></td>")
 
-        var janela = window.open('', '','width=1000, height=600');
-        janela.document.write("<small><Strong>Dados do Profissional </Strong></small>")
-        janela.document.write("<br> <small><%=user.nome%> </small> <br> <small><%=user.profissao%> </small><hr>")
-        janela.document.write("<h1 align='center'>Relatório de Atendimento Quantitativo </h1> ");
-        
-        janela.document.write("<p> Atendimento Diário </p>  <hr style='border: 2px black solid;'>  ");
-        janela.document.write("<table width=1000>")
-        janela.document.write("<tr style=' align-content: space-between;'>")
-        janela.document.write("<td><strong>DATA</strong></td>")
-        janela.document.write("<td align='center'> <strong>QUANTIDADE</strong></td>")
+    janela.document.write("</tr>")
+    janela.document.write("<tr style=' align-content: space-between;'>")
+    janela.document.write("<td> <%= hoje %> </td>")
 
-        janela.document.write("</tr>")
-        janela.document.write("<tr style=' align-content: space-between;'>")
-        janela.document.write("<td> <%=hoje%> </td>")
-        janela.document.write("<td ><p align='center'><%=dataDayslength%></p></td>")
+    janela.document.write("<td > <% dataDay.forEach((dataDay)=> { %>")
+    janela.document.write("<p align='center'><%= dataDay.nome %></p>")
+    janela.document.write("<% }) %> </td> </tr>")
 
-        janela.document.write("</tr>")
-            
-        janela.document.write("</table>")
-       
-        janela.document.write("<hr style='border: 2px black solid;'>  <br> <br> <br>  <p>Processsado por Computador em <%=datanow%>")
+    janela.document.write("</table>")
 
-        
-        janela.print()
-    }
+    janela.document.write("<hr style='border: 2px black solid;'> <br> <br> <br> <p>Processsado por Computador em <%= datanow %>")
+
+    janela.print()
+  }
+  gerarPdfQuantitativo = function () {
+    var pegar = document.getElementById("dados").innerHTML
+    var pegar1 = document.getElementById("dados1").innerHTML
+
+    var janela = window.open('', '', 'width=1000, height=600');
+    janela.document.write("<small><Strong>Dados do Profissional </Strong></small>")
+    janela.document.write("<br> <small><%= user.nome %> </small> <br> <small><%= user.profissao %> </small><hr>")
+    janela.document.write("<h1 align='center'>Relatório de Atendimento Quantitativo </h1> ");
+
+    janela.document.write("<p> Atendimento Diário </p>  <hr style='border: 2px black solid;'>  ");
+    janela.document.write("<table width=1000>")
+    janela.document.write("<tr style=' align-content: space-between;'>")
+    janela.document.write("<td><strong>DATA</strong></td>")
+    janela.document.write("<td align='center'> <strong>QUANTIDADE</strong></td>")
+
+    janela.document.write("</tr>")
+    janela.document.write("<tr style=' align-content: space-between;'>")
+    janela.document.write("<td> <%= hoje %> </td>")
+    janela.document.write("<td ><p align='center'><%= dataDayslength %></p></td>")
+
+    janela.document.write("</tr>")
+
+    janela.document.write("</table>")
+
+    janela.document.write("<hr style='border: 2px black solid;'>  <br> <br> <br>  <p>Processsado por Computador em <%= datanow %>")
+
+
+    janela.print()
+  }
 </script>
-<%- include ("partials/footer.ejs")%>
+<%- include ("partials/footer.ejs") %>

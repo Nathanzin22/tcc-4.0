@@ -1,136 +1,140 @@
- <%- include ("partials/header.ejs")%>
+<%- include ("partials/header.ejs") %>
 <style>
-  .fundo{
-       background-color: rgba(122, 177, 223, 0.692);
-      color: white;
-       height: 685px;
-       width: 101.9%;;
-  }
-   
-   #body{
-  padding: 0;
-  margin: 0;
-  }
-   
-   
+    .fundo {
+        background-color: rgba(122, 177, 223, 0.692);
+        color: white;
+        height: 685px;
+        width: 101.9%;;
+    }
+
+    #body {
+        padding: 0;
+        margin: 0;
+    }
+
+
 </style>
 <body>
-  
-  <%- include ("partials/navbar.ejs")%> 
-  <%- include ("partials/load.ejs")%>
-  
-  <%- include ("partials/erro.ejs")%>
-  <%- include ("partials/sucess.ejs")%>
+
+<%- include ("partials/navbar.ejs") %>
+<%- include ("partials/load.ejs") %>
+
+<%- include ("partials/erro.ejs") %>
+<%- include ("partials/sucess.ejs") %>
 <br> <br>
- 
- 
+
 
 <div class="row justify-content-sm-center" id="body">
-    
-   <div class="col-sm-6 col-md-6">
-       <h2>Configurações de Conta</h2>
 
-    <div class="card card mb-3">
-     <div class="card-body">
-        <h4 align="center">Informações Basica da Conta</h4>
-        <p> <strong>Informação básica da conta</strong> <br>
-          Estas configurações incluem informações básicas sobre a sua conta.</p>
-       <form action="/users/editar", method="POST">
-           <label for="nome">Nome :</label>
-           <input type="text" name="nome" value="<%=usuario.nome %>" class="form-control" id="nome" required>
-           <label for="cpf">CPF:</label>
-           <input type="text" name="cpf" class="form-control" value="<%=usuario.cpf %> " required>
-           <label for="profissao">Profissão:</label>
-           <input type="text" name="profissao" class="form-control" value="<%=usuario.profissao %>" required>
-           <label for="telefone">Telefone</label>
-           <input name="telefone" id="telefone" class="form-control" type="text" value="<%=usuario.telefone %>" required>
-           <label for="password">Senha</label> <br>
-           <a type="button"  class="btn btn-outline-primary mt-1" data-bs-target="#exampleModal" data-bs-toggle="modal">Redefinir a Senha</a> <br>
-           <label for="email">Endereço de e-mail (Identificador de início de sessão</label>
-           <input type="email" name="email" class="form-control" value="<%=usuario.email%>">
-          <input type="hidden" name="id" id="id" value="<%=usuario.id%>">
-          
-           
-           
-           <button type="submit" class="btn btn-success mt-3" align="center">Editar</button> 
-           <a type="button" class="btn alert-danger mt-3" align="center" href="/">Cancelar</a>
-           
+    <div class="col-sm-6 col-md-6">
+        <h2>Configurações de Conta</h2>
 
-       </form> 
-       <!-- Button trigger modal -->
- 
+        <div class="card card mb-3">
+            <div class="card-body">
+                <h4 align="center">Informações Basica da Conta</h4>
+                <p><strong>Informação básica da conta</strong> <br>
+                    Estas configurações incluem informações básicas sobre a sua conta.</p>
+                <form action="/users/editar" , method="POST">
+                    <label for="nome">Nome :</label>
+                    <input type="text" name="nome" value="<%= usuario.nome %>" class="form-control" id="nome" required>
+                    <label for="cpf">CPF:</label>
+                    <input type="text" name="cpf" class="form-control" value="<%= usuario.cpf %> " required>
+                    <label for="profissao">Profissão:</label>
+                    <input type="text" name="profissao" class="form-control" value="<%= usuario.profissao %>" required>
+                    <label for="telefone">Telefone</label>
+                    <input name="telefone" id="telefone" class="form-control" type="text"
+                           value="<%= usuario.telefone %>" required>
+                    <label for="password">Senha</label> <br>
+                    <a type="button" class="btn btn-outline-primary mt-1" data-bs-target="#exampleModal"
+                       data-bs-toggle="modal">Redefinir a Senha</a> <br>
+                    <label for="email">Endereço de e-mail (Identificador de início de sessão</label>
+                    <input type="email" name="email" class="form-control" value="<%= usuario.email %>">
+                    <input type="hidden" name="id" id="id" value="<%= usuario.id %>">
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Redefinir Senha</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form action="/users/redefinir/senha" method="post">
-      <div class="modal-body">
-        
-        <label for="senha">Digite a Senha antiga</label>
-        <input type="password" name="senha" class="form-control" >
-        <label for="senhaNova">Digite a Nova senha</label>
-        <input type="password" class="form-control" name="senhaNova" required>
-       
- 
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-    </form>
+
+                    <button type="submit" class="btn btn-success mt-3" align="center">Editar</button>
+                    <a type="button" class="btn alert-danger mt-3" align="center" href="/">Cancelar</a>
+
+
+                </form>
+                <!-- Button trigger modal -->
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Redefinir Senha</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <form action="/users/redefinir/senha" method="post">
+                                <div class="modal-body">
+
+                                    <label for="senha">Digite a Senha antiga</label>
+                                    <input type="password" name="senha" class="form-control">
+                                    <label for="senhaNova">Digite a Nova senha</label>
+                                    <input type="password" class="form-control" name="senhaNova" required>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="btn-danger mt-4">
+                    <p>Aviso: a remoção da conta é permanente. Por favor, leia atentamente antes de continuar. Esta é
+                        uma acção irreversível. Nunca mais poderá usar a sua conta.</p>
+                </nav>
+
+
+                <button class="btn btn-outline-danger mt-1" data-bs-target="#exampleModal2" data-bs-toggle="modal">
+                    Eliminar Minha Conta
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confirmar Exclusão</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <form action="/users/deletar/<%= usuario.id %>" method="post">
+                                <div class="modal-body">
+
+                                    <p>Você está prestes a excluir o usuário:</p>
+                                    <p>Nome: <%= usuario.nome %></p>
+                                    <label for="senha"><h6>Digite a senha para Continuar</h6></label>
+                                    <input type="password" name="senha" class="form-control">
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar
+                                    </button>
+                                    <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-  </div>
-</div>
-
-       <nav class="btn-danger mt-4">
-        <p>Aviso: a remoção da conta é permanente. Por favor, leia atentamente antes de continuar. Esta é uma acção irreversível. Nunca mais poderá usar a sua conta.</p>
-       </nav>
-
-       
-      
-        
-       <button   class="btn btn-outline-danger mt-1" data-bs-target="#exampleModal2" data-bs-toggle="modal"> Eliminar Minha Conta  </button>
-        
-      <!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Confirmar Exclusão</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form action="/users/deletar/<%=usuario.id%>" method="post">
-      <div class="modal-body">
-        
-        <p>Você está prestes a excluir o usuário:</p>
-        <p>Nome: <%=usuario.nome %></p>
-        <label for="senha"><h6>Digite a senha para Continuar</h6></label>
-        <input type="password" name="senha" class="form-control" >
-         
-       
- 
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
-      </div>
-    </form>
-    </div>
-  </div>
-</div>
-   </div>
-       </div>
-       
-   </div>
 
 
 </div>
 </body>
-<%- include ("partials/footer.ejs")%>
+<%- include ("partials/footer.ejs") %>
