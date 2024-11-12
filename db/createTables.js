@@ -2,14 +2,14 @@ const pool = require('./dbconexão');
 
 async function createTables() {
   const createTableQuery = `
-  CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    cpf VARCHAR(11) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    profissao VARCHAR(100) NOT NULL,
-    telefone VARCHAR(20) NOT NULL,
-    senha VARCHAR(60) NOT NULL
+    CREATE TABLE IF NOT EXISTS users (
+      id SERIAL PRIMARY KEY,
+      nome VARCHAR(100) NOT NULL,
+      cpf VARCHAR(11) NOT NULL,
+      email VARCHAR(100) NOT NULL,
+      profissao VARCHAR(100) NOT NULL,
+      telefone VARCHAR(20) NOT NULL,
+      senha VARCHAR(60) NOT NULL
     );
     
     CREATE TABLE IF NOT EXISTS registro (
@@ -39,6 +39,7 @@ async function createTables() {
       profissao VARCHAR(100) NOT NULL,
       user_id INTEGER REFERENCES users(id)
     );
+    
     CREATE TABLE IF NOT EXISTS foto (
       id SERIAL PRIMARY KEY,
       nome TEXT NOT NULL,
@@ -49,8 +50,10 @@ async function createTables() {
       id SERIAL PRIMARY KEY,
       nome VARCHAR(100) NOT NULL
     );
+    
+    ALTER TABLE public.agendas ADD obs varchar(255) NULL;
   `;
-
+  
   try {
     await pool.query(createTableQuery);
     console.log('Tabelas criadas com sucesso!');
