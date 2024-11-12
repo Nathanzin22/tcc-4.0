@@ -10,17 +10,14 @@ const flash = require("connect-flash")
 const User = require("./router/user")
 require("./config/auth")(passport)
 
-
 const UserDao = require('./entidades/user/userdao.js'); // Altere o caminho conforme necessário
 const userDao = new UserDao();
 const AgendaDao = require('./entidades/agenda/agendadao.js');
 const ReservaDao = require('./entidades/registro/registaTao.js');
 const fotoAo = require("./entidades/foto/fotoAo.js");
 
-
 const FotoDao = new fotoAo()
 const reservaDao = new ReservaDao()
-
 
 // Criando uma instância do AgendaDao
 const agendaDao = new AgendaDao();
@@ -29,7 +26,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public'))); // Serve arquivos estáticos da pasta 'public'
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-
 
 app.use(session({
   secret: "agenda",
@@ -50,10 +46,8 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error")
   res.locals.user = req.user || null
   
-  
   next()
 })
-
 
 // Rota para editar um usuário
 app.post('/editaruser/:cpf', async (req, res) => {
@@ -67,7 +61,6 @@ app.post('/editaruser/:cpf', async (req, res) => {
   }
 });
 
-
 // Rota para deletar um usuário
 app.post('/deletaruser/:cpf', async (req, res) => {
   try {
@@ -79,13 +72,12 @@ app.post('/deletaruser/:cpf', async (req, res) => {
   }
 });
 
-
 app.use("/users", User)
 
 //Rota para reserva
 app.get("/reservar/:id/:user_id", async (req, res) => {
-  var agenda = req.params.id;
-  var usuario = req.params.user_id
+  const agenda = req.params.id;
+  const usuario = req.params.user_id;
   const id = await agendaDao.findById(agenda)
   const user_id = await userDao.findById(usuario)
   
@@ -99,7 +91,6 @@ app.get("/reservar/:id/:user_id", async (req, res) => {
   
   res.render("reserva", {id, user_id, user})
 })
-
 
 //salvar a reserva do cliente
 app.post("/reservar", async (req, res) => {
@@ -119,12 +110,13 @@ app.post("/reservar", async (req, res) => {
 
 //Rota de formulario
 app.get("/", async (req, res) => {
-  var resc = null
+  const resc = null;
   const tag = await userDao.buscarTodosProfissao()
   const buscarfoto = await FotoDao.buscarTodos()
+  
   let array = [];
   let reservar = []
-  console.log(buscarfoto.length)
+  
   for (let index = 0; index < buscarfoto.length; index++) {
     const element = buscarfoto[index];
     
@@ -142,8 +134,7 @@ app.get("/", async (req, res) => {
         novoArray.push(obj);
       });
     });
-    console.log(array)
-    console.log(novoArray);
+    
     res.render("home", {
       profissao: resc,
       tag: tag,
@@ -154,26 +145,23 @@ app.get("/", async (req, res) => {
   } catch (error) {
   
   }
-  
 })
-
 
 app.get('/users/telainicial', (req, res) => {
   res.render('telainicial.ejs');
 });
 
-
 //new router to home
 app.post("/busca", async (req, res) => {
   const profissao = req.body.profissao
   const buscarfoto = await FotoDao.buscarTodos()
-  console.log(buscarfoto.id)
+  
   const data = await agendaDao.buscar(profissao)
   
   const tag = await userDao.buscarTodosProfissao()
   let array = [];
   let reservar = []
-  console.log(buscarfoto.length)
+  
   for (let index = 0; index < buscarfoto.length; index++) {
     const element = buscarfoto[index];
     
@@ -189,6 +177,7 @@ app.post("/busca", async (req, res) => {
       novoArray.push(obj);
     });
   });
+  
   res.render("home", {
     profissao: data,
     tag: tag,
@@ -213,8 +202,6 @@ app.post("/login", async (req, res, next) => {
         
       })(req, res, next)
     }
-    
-    
   }
 )
 
@@ -223,7 +210,6 @@ app.get("/logout", (req, res) => {
     console.log("success_msg", "Deslogado com sucesso")
     res.redirect("/")
   })
-  
 })
 
 app.post("/teste", async (req, res) => {
@@ -233,7 +219,6 @@ app.post("/teste", async (req, res) => {
     res.json({status: "email existe", result})
   } else {
     res.json(" erro em encotrar o email")
-    
   }
 })
 

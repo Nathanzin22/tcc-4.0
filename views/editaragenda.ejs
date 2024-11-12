@@ -16,35 +16,35 @@
     <div class="card mt-4">
         <div class="card-body">
             <h3>Preencher os dados</h3> <br>
-            <div class="" style="width: 60%; margin: auto;">
 
+            <div class="" style="width: 60%; margin: auto;">
                 <div class="container">
                     <form action="/users/agenda/editar" method="POST">
 
-                        <label for="data">Agendar o dia </label>
-                        <input name="data" type="date" class="form-control" value="<%= agenda.data %>" required> <br>
-                        <label for="horario">Agendar a hora</label>
-                        <input name="horario" type="time" class="form-control" value="<%= agenda.horario %>" required>
-                        <br>
-                        <label for="disponibilidade">Selecione a Disponibilidade</label>
                         <input type="hidden" name="id" value="<%= id %>">
-                        <select name="disponibilidade" class="form-control">
+
+                        <label for="data">Agendar o dia </label>
+                        <input name="data" id="data" type="date" class="form-control" value="<%= agenda.data %>" required> <br>
+
+                        <label for="horario">Agendar a hora</label>
+                        <input name="horario" id="horario" type="time" class="form-control" value="<%= agenda.horario %>" required> <br>
+
+                        <label for="disponibilidade">Selecione a Disponibilidade</label>
+                        <select name="disponibilidade" id="disponibilidade" class="form-control">
                             <option value="1">Aberto</option>
                             <option value="0">Fechado</option>
+                        </select> <br>
 
-                        </select>
-                        <br>
+                        <label for="obs">Observação</label>
+                        <textarea id="obs" name="obs" class="form-control"></textarea> <br>
+
                         <button class="btn btn-success" type="submit">Agendar</button>
-                        <a class="btn alert-danger" href="/" type="button
-                ">Cancelar</a>
+                        <a class="btn alert-danger" href="/" type="button">Cancelar</a>
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
-
-
 </div>
 </body>
 <%- include ("partials/footer.ejs") %>

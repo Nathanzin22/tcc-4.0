@@ -61,14 +61,13 @@ router.get("/cunsultas/editar/:id", async (req, res) => {
 //rotas de editar a agenda
 
 router.post("/agenda/editar", async (req, res) => {
-  
   const id = Number(req.body.id)
-  
   
   const agenda = {
     disponibilidade: req.body.disponibilidade,
     data: req.body.data,
     horario: req.body.horario,
+    obs: req.body.obs,
     id: id
   }
   
@@ -123,11 +122,8 @@ router.get("/editar/:id", async (req, res) => {
   const id = req.params.id
   
   userDao.findById(id).then(user => {
-    
     res.render("editaruser", {usuario: user})
   })
-  
-  
 })
 
 router.post("/reservas/atender", async (req, res) => {
@@ -135,6 +131,7 @@ router.post("/reservas/atender", async (req, res) => {
   const {id} = req.user
   let datanow = Date()
   let hoje = `${datanow[8]}${datanow[9]}/${datanow[4]}${datanow[5]}${datanow[6]}`
+  
   const data = {
     nome: req.body.nome,
     telefone: req.body.telefone,
@@ -143,6 +140,7 @@ router.post("/reservas/atender", async (req, res) => {
     user_id: id,
     datanow: hoje
   }
+  
   const eliminar = req.body.id
   await finalizado.salvar(data)
   
@@ -150,16 +148,19 @@ router.post("/reservas/atender", async (req, res) => {
   
   res.redirect("/users/reservas")
 })
+
 router.get("/reservas/deletar2/:id", async (req, res) => {
-  var id = req.params.id
+  const id = req.params.id;
   await finalizado.deleteOne(id);
+  
   req.flash("error_msg", ` ${id} deletado`)
   res.redirect("/users/reservas")
 })
 
 router.get("/reservas/deletar/:id", async (req, res) => {
-  var id = req.params.id
+  const id = req.params.id;
   await registroDao.deleteOne(id);
+  
   req.flash("error_msg", `Compromisso ${id} deletado`)
   res.redirect("/users/reservas")
 })
@@ -168,12 +169,12 @@ router.get("/reservas/deletar/:id", async (req, res) => {
 
 router.get("/reservas", async (req, res) => {
   const {id} = req.user;
-  var finalizados = await finalizado.findById(id)
+  const finalizados = await finalizado.findById(id);
   const data = await registroDao.findById(id)
   let datanow = Date()
   let hoje = `${datanow[8]}${datanow[9]}/${datanow[4]}${datanow[5]}${datanow[6]}`
   const dataDays = await finalizado.findByDate(hoje)
-
+  
   res.render("clientereserva",
     {
       data,
@@ -202,9 +203,9 @@ router.post("/perfil/foto", upload.single('foto'), async (req, res) => {
     user_id: id
   }
   
-  
   await fotoDao.deletar(id)
   await fotoDao.salvar(foto)
+  
   res.redirect(`/users/perfil/${id}`)
 })
 
@@ -218,6 +219,7 @@ router.post('/users', async (req, res) => {
     if (!req.body.nome || req.body.nome == null || req.body.nome == undefined) {
       erros.push({text: "Digite nome completo"})
     }
+    
     if (!cpf || cpf == null || cpf == undefined) {
       erros.push({text: "Digite número do CPF"})
     }
@@ -225,12 +227,15 @@ router.post('/users', async (req, res) => {
     if (!req.body.email || req.body.email == null || req.body.email == undefined) {
       erros.push({text: "Digite o E-mail"})
     }
+    
     if (req.body.senha.length < 6) {
       erros.push({text: "A Senha tem no mínimo 6 dígitos"})
     }
+    
     if (cpf.length !== 11) {
       erros.push({text: "O CPF deve ter exatamente 11 dígitos"})
     }
+    
     if (req.body.senha2 != req.body.senha) {
       erros.push({text: "Senhas diferentes"})
     }
@@ -271,15 +276,16 @@ router.post('/users', async (req, res) => {
     
   } catch (error) {
     console.error("Erro na criação de conta: ", error);
+    
     res.redirect("/users/cadastrouser");
   }
 });
-
 
 router.get('/confirmardeletaruser/:cpf', async (req, res) => {
   try {
     const cpf = req.params.cpf;
     const usuario = await userDao.buscar(cpf);
+    
     res.render('confirmardeletaruser.ejs', {usuario});
   } catch (error) {
     res.status(500).json({error: 'Erro ao carregar página de confirmação de exclusão de usuário'});
@@ -288,7 +294,7 @@ router.get('/confirmardeletaruser/:cpf', async (req, res) => {
 
 router.post("/editar", (req, res) => {
   const id = req.body.id
-
+  
   const user = {
     nome: req.body.nome,
     cpf: req.body.cpf.replace(/\D/g, ''),
@@ -296,6 +302,7 @@ router.post("/editar", (req, res) => {
     profissao: req.body.profissao,
     telefone: req.body.telefone
   }
+  
   userDao.editar(user, id).then(() => {
     req.flash("success_msg", "configurações salva")
     res.redirect("/")
@@ -303,9 +310,9 @@ router.post("/editar", (req, res) => {
 })
 
 router.post("/redefinir/senha", async (req, res) => {
-  var {id} = req.user
-  var senha = req.body.senha
-  var senhaNova = req.body.senhaNova
+  const {id} = req.user
+  const senha = req.body.senha
+  let senhaNova = req.body.senhaNova
   
   await userDao.findById(id).then((usuario) => {
     if (!usuario) { //return done(null, false, {message: "Não existe uma conta com este número de Bilhete"})
@@ -336,44 +343,38 @@ router.post("/redefinir/senha", async (req, res) => {
       } else {
         req.flash("error_msg", "Senha Incorreta digite a senha antiga")
         res.redirect("/")
-        
       }
     })
   })
-  
 })
 
 
 router.post("/deletar/:id", async (req, res) => {
-  
-  var id = req.params.id
-  var senha = req.body.senha
+  const id = req.params.id
+  const senha = req.body.senha
+
   await userDao.findById(id).then((usuario) => {
     if (!usuario) { //return done(null, false, {message: "Não existe uma conta com este número de Bilhete"})
       req.flash("error_msg", "Não é possivel eliminar")
       res.redirect("/")
     }
+
     bcrypt.compare(senha, usuario.senha, async (erro, batem) => {
       if (batem) {
-        
-        
         await fotoDao.deletar(id)
         await registroDao.deletarOne(id)
         await finalizado.deletarOne(id)
         await agendaDao.deletarOne(id)
         
         req.logOut(() => {
-          
           userDao.deletar(id).then(() => {
             req.flash("success_msg", "usuario eliminado")
             res.redirect("/")
           })
         })
-        
       } else {
         req.flash("error_msg", "Senha Incorreta digite a senha antiga")
         res.redirect("/")
-        
       }
     })
   }).catch((err) => {
@@ -413,6 +414,7 @@ router.post("/agenda", async (req, res) => {
       data: req.body.data,
       horario: req.body.horario,
       profissao: profissao,
+      obs: req.body.obs,
       user_id: id
     }
     
