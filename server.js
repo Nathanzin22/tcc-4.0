@@ -15,12 +15,15 @@ const userDao = new UserDao();
 const AgendaDao = require('./entidades/agenda/agendadao.js');
 const ReservaDao = require('./entidades/registro/registaTao.js');
 const fotoAo = require("./entidades/foto/fotoAo.js");
+const ServicosDao = require('./entidades/servicos/servicosdao.js');
 
 const FotoDao = new fotoAo()
 const reservaDao = new ReservaDao()
 
 // Criando uma instância do AgendaDao
 const agendaDao = new AgendaDao();
+const servicosDao = new ServicosDao();
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public'))); // Serve arquivos estáticos da pasta 'public'
@@ -157,6 +160,12 @@ app.post("/busca", async (req, res) => {
   const buscarfoto = await FotoDao.buscarTodos()
   
   const data = await agendaDao.buscar(profissao)
+  
+  for (let index = 0; index < data.length; index++) {
+    const servico = await servicosDao.buscar(data[index]['user_id'])
+    
+    data[index].servico = servico[0].servico
+  }
   
   const tag = await userDao.buscarTodosProfissao()
   let array = [];
