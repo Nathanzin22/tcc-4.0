@@ -5,8 +5,6 @@
         width: 100%;
         margin: 0;
         padding: 0;
-
-
     }
 
     #button {
@@ -16,33 +14,23 @@
     #nav-but1 {
         padding: 0;
         padding: 4px;
-
         display: flex;
         justify-content: space-between;
         flex-wrap: nowrap;
-
     }
 </style>
 
 <nav class="card1">
     <ul class="nav-but ms-auto mb-2 mb-lg-0" id="nav-but1">
-
         <% if(user) { %>
-
-
-
             <a class="nav-link" href="/users/agenda">
                 <button class="btn btn-primary " type="button">Criar Agenda</button>
             </a>
-        <% }else { %>
         <% } %>
-
     </ul>
-
 </nav>
 
-
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d0d0d0;">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">LOGO</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -52,7 +40,6 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <% if(user) { %>
-
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
@@ -66,57 +53,46 @@
                         <a class="nav-link active" aria-current="page" href="/users/reservas">Ver Reserva</a>
                     </li>
                 <% }else { %>
-
                     <li class="nav-item">
                         <a class="nav-link active" href="#sobre">Quem Somos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#servico">Serviços</a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link active" href="#contatos">Contatos</a>
                     </li>
                 <% } %>
-
                 <li class="nav-item">
                     <a class="nav-link active"></a>
                 </li>
             </ul>
             <form class="d-flex" role="search">
-
                 <% if(user) { %>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
                         <li class="nav-item dropdown">
-
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                aria-expanded="true">
                                 <%= user.email %>
                             </a>
                             <ul class="dropdown-menu">
-
                                 <li><a class="dropdown-item" href="/users/reservas">Relatórios</a></li>
-
                                 <li><a class="dropdown-item" href="/users/perfil/<%= user.id %>">Perfil</a></li>
                                 <li><a class="dropdown-item" href="/users/editar/<%= user.id %>">conta</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                     <a class="nav-link" href="/logout">
                                         <button class="btn alert-danger" type="button">Sair</button>
-                                    </a></li>
-
-
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
                 <% }else { %>
-
                     <a class="nav-link" href="/users/login">
                         <button class="btn btn-outline-success" type="button">Login</button>
                     </a>
                 <% } %>
-
             </form>
         </div>
     </div>

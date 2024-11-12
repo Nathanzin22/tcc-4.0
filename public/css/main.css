@@ -1,6 +1,9 @@
-.spinner-wrapper{
-    background-color: rgba(0, 255, 255, 0.339); 
-    
+body {
+    background-color: #d0d0d0;
+}
+
+.spinner-wrapper {
+    background-color: rgba(0, 255, 255, 0.339);
     position: fixed;
     top: 0;
     left: 0;
@@ -13,7 +16,7 @@
     transition: all 0.2s;
 }
 
-.spinner-border{
- height: 60px;
- width: 60px;
+.spinner-border {
+    height: 60px;
+    width: 60px;
 }

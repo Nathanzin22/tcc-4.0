@@ -11,9 +11,8 @@
         padding: 0;
         margin: 0;
     }
-
-
 </style>
+
 <body>
 <%- include ("partials/navbar.ejs") %>
 <%- include ("partials/load.ejs") %>
@@ -24,36 +23,26 @@
 <br>
 <br>
 <div class="row justify-content-sm-center" id="body">
-
     <div class="col-sm-6 col-md-6 ">
-
-
         <div class="card card mb-3  ">
             <div class="card-body">
-
-
                 <h3 align="center">Login</h3>
-                <div class="mt-5"></div>
-                <form action="/login" , method="POST">
 
-                    <label for="nome">Email do Usuário::</label>
+                <div class="mt-5"></div>
+
+                <form action="/login" method="POST">
+                    <label for="email">Email do Usuário:</label>
                     <input type="text" name="email" class="form-control" id="email">
 
-                    <label for="senha">Senha</label>
-                    <input type="password" name="senha" class="form-control">
-
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" class="form-control">
 
                     <button type="submit" class="btn btn-success mt-3" align="center">Entrar</button>
-
-
                 </form>
                 <a type="button" href="/users/cadastrouser" class="nav-link" align="center">Não tem conta?</a>
             </div>
         </div>
-
     </div>
-
-
 </div>
 </body>
 <%- include ("partials/footer.ejs") %>
