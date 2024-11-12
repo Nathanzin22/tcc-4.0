@@ -52,6 +52,7 @@
         height: 500px;
     }
 </style>
+
 <body>
 <%- include ("partials/load.ejs") %>
 <%- include ("partials/navbar.ejs") %>
@@ -166,7 +167,27 @@
                     <div class="card mb-5">
                         <div class="card-body">
                             <!-- Exibe o status da agenda -->
-                            <h4>Agenda <strong class="alert-success">Aberta</strong></h4> <br>
+                            <div style="display: flex; justify-content: space-between">
+                                <h4>Agenda <strong class="alert-success">Aberta</strong></h4>
+
+                                <button class="btn btn-outline-warning mt-1" data-bs-target="#servicoModal" data-bs-toggle="modal">
+                                    Serviços
+                                </button>
+
+                                <div class="modal fade" id="servicoModal" tabindex="-1" aria-labelledby="servicoModalNome" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="servicoModalNome">Serviços</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p><%= profissao.servico %></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <% if(profissao.horario > '17:59:00') { %>
                                 <p>Disponibilidade: <strong class="alert-primary">Noite</strong></p>
