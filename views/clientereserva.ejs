@@ -11,12 +11,11 @@
     <br>
     <br>
     <br>
-    <% if( dataDayslength > 0 ) { %>
-
-        <button class="btn btn-outline-primary mt-1" data-bs-target="#exampleModal" data-bs-toggle="modal"">Export
-        Relatório</button>
-
-    <% }else{ %>
+    <% if (dataDayslength > 0) { %>
+        <button class="btn btn-outline-primary mt-1" data-bs-target="#exampleModal" data-bs-toggle="modal">Export
+            Relatório
+        </button>
+    <% } else { %>
         <p>Nenhum Relatório</p>
     <% } %>
 
@@ -26,28 +25,24 @@
         </div>
         <div class="card-body" id="dados1">
             <% if(data.length > 0) { %>
-                <% data.forEach((data)=>{ %>
+                <% data.forEach((data) => { %>
+                    <small> Nome: <strong><%= data.nome %></strong> </small> <br>
+                    <small> Telefone: <strong> <%= data.telefone %></strong></small> <br>
+                    <small> data: <strong><%= new Date(data.data).toLocaleDateString('pt-BR') %></strong> </small> <br>
+                    <small> Horario: <strong><%= data.horario.substring(0, 5) %></strong> </small> <br>
 
-                <small> Nome: <strong><%= data.nome %></strong> </small> <br>
-                <small> Telefone: <strong> <%= data.telefone %></strong></small> <br>
-                <small> data: <strong><%= data.data %></strong> </small> <br>
-                <small> Horario: <strong><%= data.horario %></strong> </small> <br>
+                    <form action="/users/reservas/atender/" method="post">
+                        <input type="hidden" name="nome" value="<%= data.nome %>">
+                        <input type="hidden" name="telefone" value="<%= data.telefone %>">
+                        <input type="hidden" name="data" value="<%= data.data %>">
+                        <input type="hidden" name="horario" value="<%= data.horario %>">
+                        <input type="hidden" name="id" value="<%= data.id %>">
 
-                <form action="/users/reservas/atender/" method="post">
-                    <input type="hidden" name="nome" value="<%= data.nome %>">
-                    <input type="hidden" name="telefone" value="<%= data.telefone %>">
-                    <input type="hidden" name="data" value="<%= data.data %>">
-                    <input type="hidden" name="horario" value="<%= data.horario %>">
-                    <input type="hidden" name="id" value="<%= data.id %>">
+                        <button class="btn alert-success mt-2" type="submit">Atender</button>
+                    </form>
 
-
-                    <button class="btn alert-success mt-2" type="submit">Atender</button>
-
-                </form>
-
-
-                <a class="btn alert-danger mt-2" href="/users/reservas/deletar/<%= data.id %>">Eliminar</a>
-                <hr>
+                    <a class="btn alert-danger mt-2" href="/users/reservas/deletar/<%= data.id %>">Eliminar</a>
+                    <hr>
                 <% }) %>
             <% } else { %>
                 <h4>Sem Compromisso</h4>
@@ -60,40 +55,33 @@
         </div>
         <div class="card-body" id="dados">
             <% if( dataDayslength > 0) { %>
-                <% finalizados.forEach((data)=>{ %>
+                <% finalizados.forEach((data) => { %>
+                    <small> Nome: <strong><%= data.nome %></strong> </small> <br>
+                    <small> Telefone: <strong> <%= data.telefone %></strong></small> <br>
+                    <small> data: <strong><%= new Date(data.data).toLocaleDateString('pt-BR') %></strong> </small> <br>
+                    <small> Horario: <strong><%= data.horario.substring(0, 5) %></strong> </small> <br>
+                    <p class="btn alert-success mt-4">Atendido</p>
 
-                <small> Nome: <strong><%= data.nome %></strong> </small> <br>
-                <small> Telefone: <strong> <%= data.telefone %></strong></small> <br>
-                <small> data: <strong><%= data.data %></strong> </small> <br>
-                <small> Horario: <strong><%= data.horario %></strong> </small> <br>
-                <p class="btn alert-success mt-4">Atendido</p>
-
-
-                <a class="btn alert-danger mt-2" href="/users/reservas/deletar2/<%= data.id %>">Eliminar</a>
-                <hr>
+                    <a class="btn alert-danger mt-2" href="/users/reservas/deletar2/<%= data.id %>">Eliminar</a>
+                    <hr>
                 <% }) %>
             <% } else { %>
                 <h4>Vazio</h4>
             <% } %>
         </div>
     </div>
-
 </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <div class="modal-body">
                 <button class="btn btn-success" onclick="gerarPdfAnalitico()">Gerar Relatório Analitico</button>
                 <button class="btn btn-sucess" onclick="gerarPdfQuantitativo()">Gerar Relatório Quantitativo</button>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-
             </div>
-
         </div>
     </div>
 </div>
@@ -131,6 +119,7 @@
 
     janela.print()
   }
+
   gerarPdfQuantitativo = function () {
     var pegar = document.getElementById("dados").innerHTML
     var pegar1 = document.getElementById("dados1").innerHTML
@@ -156,7 +145,6 @@
     janela.document.write("</table>")
 
     janela.document.write("<hr style='border: 2px black solid;'>  <br> <br> <br>  <p>Processsado por Computador em <%= datanow %>")
-
 
     janela.print()
   }

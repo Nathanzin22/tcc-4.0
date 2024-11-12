@@ -51,7 +51,18 @@ async function createTables() {
       nome VARCHAR(100) NOT NULL
     );
     
-    ALTER TABLE public.agendas ADD obs varchar(255) NULL;
+    DO $$
+    BEGIN
+      IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='agendas' AND column_name='obs') THEN
+        ALTER TABLE public.agendas ADD obs varchar(255) NULL;
+      END IF;
+    END $$;
+    
+    CREATE TABLE IF NOT EXISTS servicos (
+      id SERIAL PRIMARY KEY,
+      servico VARCHAR(255) NOT NULL,
+      user_id INTEGER REFERENCES users(id)
+    );
   `;
   
   try {

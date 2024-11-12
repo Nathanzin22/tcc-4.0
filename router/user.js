@@ -4,6 +4,7 @@ const router = express.Router()
 const UserDao = require('../entidades/user/userdao.js'); // Altere o caminho conforme necessário
 const userDao = new UserDao();
 const AgendaDao = require('../entidades/agenda/agendadao.js');
+const ServicosDao = require('../entidades/servicos/servicosdao.js');
 const RegistroDao = require('../entidades/registro/registaTao.js');
 const Finalizado = require('../entidades/Finalizado/FinalizadoTao.js');
 const Foto = require('../entidades/foto/fotoAo.js');
@@ -22,6 +23,8 @@ const upload = require("../config/configmulter");
 
 // Criando uma instância do AgendaDao
 const agendaDao = new AgendaDao();
+
+const servicosDao = new ServicosDao();
 
 
 //rota de find de agendas
@@ -113,7 +116,7 @@ router.get("/agenda", async (req, res) => {
   try {
     res.render("formularioAgenda")
   } catch (error) {
-  
+    res.redirect("/users/login");
   }
 })
 
@@ -168,24 +171,43 @@ router.get("/reservas/deletar/:id", async (req, res) => {
 //rotas dos compromisso da agenda
 
 router.get("/reservas", async (req, res) => {
-  const {id} = req.user;
-  const finalizados = await finalizado.findById(id);
-  const data = await registroDao.findById(id)
-  let datanow = Date()
-  let hoje = `${datanow[8]}${datanow[9]}/${datanow[4]}${datanow[5]}${datanow[6]}`
-  const dataDays = await finalizado.findByDate(hoje)
-  
-  res.render("clientereserva",
-    {
-      data,
-      finalizados: finalizados,
-      dataDay: dataDays,
-      dataDayslength: dataDays.length,
-      hoje: hoje,
-      datanow
-    })
+  try {
+    const {id} = req.user;
+    const finalizados = await finalizado.findById(id);
+    const data = await registroDao.findById(id)
+    let datanow = Date()
+    let hoje = `${datanow[8]}${datanow[9]}/${datanow[4]}${datanow[5]}${datanow[6]}`
+    const dataDays = await finalizado.findByDate(hoje)
+    
+    res.render("clientereserva",
+      {
+        data,
+        finalizados: finalizados,
+        dataDay: dataDays,
+        dataDayslength: dataDays.length,
+        hoje: hoje,
+        datanow
+      })
+  } catch (error) {
+    res.redirect("/users/login");
+  }
 })
 
+router.get("/servicos/:id", async (req, res) => {
+  try {
+    const {id} = req.user;
+    const service = await servicosDao.buscar(id)
+    
+    res.render("servicosreserva",
+      {
+        id: service.length > 0 ? service[0]['id'] : null,
+        servico: service.length > 0 ? service[0] : '',
+        user_id: id
+      })
+  } catch (error) {
+    res.redirect("/users/login");
+  }
+})
 
 /*=======ROTAS POST========== 
 NESTA  AREA ESTARÁ OS ROTAS DO TIPO POST 
@@ -420,6 +442,27 @@ router.post("/agenda", async (req, res) => {
     
     await agendaDao.salvar(newAgenda)
     res.redirect("/users/cunsultas")
+  } catch (error) {
+    console.error("error ", error)
+  }
+})
+
+router.post("/servicos", async (req, res) => {
+  try {
+    const {id} = req.user || 0
+    
+    const newServico = {
+      servico: req.body.servico,
+      user_id: id,
+      id: req.body.id ?? null
+    }
+
+    if (req.body.id) {
+      await servicosDao.editar(newServico)
+    } else {
+      await servicosDao.salvar(newServico)
+    }
+    res.redirect(`/users/servicos/${id}`)
   } catch (error) {
     console.error("error ", error)
   }

@@ -1,0 +1,43 @@
+<%- include ("partials/header.ejs") %>
+
+<style>
+    .photo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+
+<body>
+<%- include ("partials/load.ejs") %>
+<%- include ("partials/navbar.ejs") %>
+<%- include ("partials/erro.ejs") %>
+<%- include ("partials/sucess.ejs") %>
+
+<div class="container">
+    <h1 align="center" class="mt-4">Serviços</h1>
+    <div class="card">
+        <div class="card-header">
+            <h3>Area de serviços</h3>
+        </div>
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <form action="/users/servicos" method="POST">
+                    <textarea id="servico" name="servico" class="form-control"><%= servico.servico %></textarea> <br>
+
+                    <% if (id == null) { %>
+                        <button class="btn btn-success" type="submit">Salvar</button>
+                    <% } else { %>
+                        <input type="hidden" name="id" value="<%= id %>">
+                        <button class="btn btn-success" type="submit">Editar</button>
+                    <% } %>
+                    <a class="btn alert-danger" href="/" type="button">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<%- include ("partials/footer.ejs") %>
