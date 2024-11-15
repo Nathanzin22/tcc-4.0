@@ -30,6 +30,7 @@
                     <small> Telefone: <strong> <%= data.telefone %></strong></small> <br>
                     <small> data: <strong><%= new Date(data.data).toLocaleDateString('pt-BR') %></strong> </small> <br>
                     <small> Horario: <strong><%= data.horario.substring(0, 5) %></strong> </small> <br>
+                    <small> Obs.: <strong><%= data.obs %></strong> </small> <br>
 
                     <form action="/users/reservas/atender/" method="post">
                         <input type="hidden" name="nome" value="<%= data.nome %>">
@@ -60,6 +61,7 @@
                     <small> Telefone: <strong> <%= data.telefone %></strong></small> <br>
                     <small> data: <strong><%= new Date(data.data).toLocaleDateString('pt-BR') %></strong> </small> <br>
                     <small> Horario: <strong><%= data.horario.substring(0, 5) %></strong> </small> <br>
+                    <small> Obs.: <strong><%= data.obs %></strong> </small> <br>
                     <p class="btn alert-success mt-4">Atendido</p>
 
                     <a class="btn alert-danger mt-2" href="/users/reservas/deletar2/<%= data.id %>">Eliminar</a>
