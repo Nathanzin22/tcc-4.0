@@ -3,16 +3,14 @@ const pool = require("../../db/dbconexão")
 
 class finalizados{
     async salvar(salvar){
-
-        const query = 'INSERT INTO finalizado (nome, telefone, data, horario, user_id, datanow) VALUES ($1, $2, $3, $4, $5, $6)'
-        const values = [salvar.nome, salvar.telefone, salvar.data, salvar.horario, salvar.user_id, salvar.datanow]
+        const query = 'INSERT INTO finalizado (nome, telefone, data, horario, user_id, datanow, obs) VALUES ($1, $2, $3, $4, $5, $6, $7)'
+        const values = [salvar.nome, salvar.telefone, salvar.data, salvar.horario, salvar.user_id, salvar.datanow, salvar.obs]
 
         try {
-
-            await pool.query(query, values)
-    console.log("tarefa salva com sucesso")            
+          await pool.query(query, values)
+          console.log("tarefa salva com sucesso")
         } catch (error) {
-           console.log("houve um erro ao gravas as tarefas", error) 
+           console.log("houve um erro ao gravas as tarefas", error)
         }
     }
 
@@ -41,7 +39,7 @@ class finalizados{
             console.log("dados reornados com exito ", horas)
 
         } catch (error) {
-            console.log("Error no findbydata ", error)          
+            console.log("Error no findbydata ", error)
         }
     }
     async deletarOne(user_id) {
@@ -53,8 +51,8 @@ class finalizados{
           console.log('Usuário deletado com sucesso!');
         } catch (error) {
           console.error('Erro ao deletar usuário:', error);
-        } 
-      } 
+        }
+      }
     async deleteOne(id){
         const query = 'DELETE FROM finalizado WHERE id = $1';
         const values = [id]
