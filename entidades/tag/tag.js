@@ -1,8 +1,7 @@
 class Tag {
     constructor(nome) {
-      this.nome = nome;
-      
+        this.nome = nome;
     }
-  }
-  
-  module.exports = Tag;
+}
+
+module.exports = Tag;
