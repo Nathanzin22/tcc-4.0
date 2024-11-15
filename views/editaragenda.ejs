@@ -24,7 +24,7 @@
                         <input type="hidden" name="id" value="<%= id %>">
 
                         <label for="data">Agendar o dia </label>
-                        <input name="data" id="data" type="date" class="form-control" value="<%= agenda.data %>" required> <br>
+                        <input name="data" id="data" type="date" class="form-control" value="<%= new Date(agenda.data).toISOString().split('T')[0] %>" required> <br>
 
                         <label for="horario">Agendar a hora</label>
                         <input name="horario" id="horario" type="time" class="form-control" value="<%= agenda.horario %>" required> <br>
@@ -36,7 +36,7 @@
                         </select> <br>
 
                         <label for="obs">Observação</label>
-                        <textarea id="obs" name="obs" class="form-control"></textarea> <br>
+                        <textarea id="obs" name="obs" class="form-control"><%= agenda.obs %></textarea> <br>
 
                         <button class="btn btn-success" type="submit">Agendar</button>
                         <a class="btn alert-danger" href="/" type="button">Cancelar</a>
