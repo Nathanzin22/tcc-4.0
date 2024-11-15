@@ -91,65 +91,65 @@
 
 </body>
 <script>
-  //relatorio analitico e quantitativo
-  //a quatidade de atendimento feito naquele dia
-  gerarPdfAnalitico = function () {
-    var pegar = document.getElementById("dados").innerHTML
-    var pegar1 = document.getElementById("dados1").innerHTML
+    //relatorio analitico e quantitativo
+    //a quatidade de atendimento feito naquele dia
+    gerarPdfAnalitico = function () {
+        var pegar = document.getElementById("dados").innerHTML
+        var pegar1 = document.getElementById("dados1").innerHTML
 
-    var janela = window.open('', '', 'width=1000, height=600')
-    janela.document.write("<small><Strong>Dados do Profissional </Strong></small>")
-    janela.document.write("<br> <small><%= user.nome %> </small> <br> <small><%= user.profissao %> </small><hr>")
-    janela.document.write("<h1 align='center'>Relatório de Atendimento Analitico </h1> ");
+        var janela = window.open('', '', 'width=1000, height=600')
+        janela.document.write("<small><Strong>Dados do Profissional </Strong></small>")
+        janela.document.write("<br> <small><%= user.nome %> </small> <br> <small><%= user.profissao %> </small><hr>")
+        janela.document.write("<h1 align='center'>Relatório de Atendimento Analitico </h1> ");
 
-    janela.document.write("<p> Atendimento Diário </p> <hr style='border: 2px black solid;'>  ");
-    janela.document.write("<table width=1000>")
-    janela.document.write("<tr style=' align-content: space-between;'>")
-    janela.document.write("<td><strong>DATA</strong></td>")
-    janela.document.write("<td align='center'> <strong>CLIENTE</strong></td>")
+        janela.document.write("<p> Atendimento Diário </p> <hr style='border: 2px black solid;'>  ");
+        janela.document.write("<table width=1000>")
+        janela.document.write("<tr style=' align-content: space-between;'>")
+        janela.document.write("<td><strong>DATA</strong></td>")
+        janela.document.write("<td align='center'> <strong>CLIENTE</strong></td>")
 
-    janela.document.write("</tr>")
-    janela.document.write("<tr style=' align-content: space-between;'>")
-    janela.document.write("<td> <%= hoje %> </td>")
+        janela.document.write("</tr>")
+        janela.document.write("<tr style=' align-content: space-between;'>")
+        janela.document.write("<td> <%= hoje %> </td>")
 
-    janela.document.write("<td > <% dataDay.forEach((dataDay)=> { %>")
-    janela.document.write("<p align='center'><%= dataDay.nome %></p>")
-    janela.document.write("<% }) %> </td> </tr>")
+        janela.document.write("<td > <% dataDay.forEach((dataDay)=> { %>")
+        janela.document.write("<p align='center'><%= dataDay.nome %></p>")
+        janela.document.write("<% }) %> </td> </tr>")
 
-    janela.document.write("</table>")
+        janela.document.write("</table>")
 
-    janela.document.write("<hr style='border: 2px black solid;'> <br> <br> <br> <p>Processsado por Computador em <%= datanow %>")
+        janela.document.write("<hr style='border: 2px black solid;'> <br> <br> <br> <p>Processsado por Computador em <%= datanow %>")
 
-    janela.print()
-  }
+        janela.print()
+    }
 
-  gerarPdfQuantitativo = function () {
-    var pegar = document.getElementById("dados").innerHTML
-    var pegar1 = document.getElementById("dados1").innerHTML
+    gerarPdfQuantitativo = function () {
+        var pegar = document.getElementById("dados").innerHTML
+        var pegar1 = document.getElementById("dados1").innerHTML
 
-    var janela = window.open('', '', 'width=1000, height=600');
-    janela.document.write("<small><Strong>Dados do Profissional </Strong></small>")
-    janela.document.write("<br> <small><%= user.nome %> </small> <br> <small><%= user.profissao %> </small><hr>")
-    janela.document.write("<h1 align='center'>Relatório de Atendimento Quantitativo </h1> ");
+        var janela = window.open('', '', 'width=1000, height=600');
+        janela.document.write("<small><Strong>Dados do Profissional </Strong></small>")
+        janela.document.write("<br> <small><%= user.nome %> </small> <br> <small><%= user.profissao %> </small><hr>")
+        janela.document.write("<h1 align='center'>Relatório de Atendimento Quantitativo </h1> ");
 
-    janela.document.write("<p> Atendimento Diário </p>  <hr style='border: 2px black solid;'>  ");
-    janela.document.write("<table width=1000>")
-    janela.document.write("<tr style=' align-content: space-between;'>")
-    janela.document.write("<td><strong>DATA</strong></td>")
-    janela.document.write("<td align='center'> <strong>QUANTIDADE</strong></td>")
+        janela.document.write("<p> Atendimento Diário </p>  <hr style='border: 2px black solid;'>  ");
+        janela.document.write("<table width=1000>")
+        janela.document.write("<tr style=' align-content: space-between;'>")
+        janela.document.write("<td><strong>DATA</strong></td>")
+        janela.document.write("<td align='center'> <strong>QUANTIDADE</strong></td>")
 
-    janela.document.write("</tr>")
-    janela.document.write("<tr style=' align-content: space-between;'>")
-    janela.document.write("<td> <%= hoje %> </td>")
-    janela.document.write("<td ><p align='center'><%= dataDayslength %></p></td>")
+        janela.document.write("</tr>")
+        janela.document.write("<tr style=' align-content: space-between;'>")
+        janela.document.write("<td> <%= hoje %> </td>")
+        janela.document.write("<td ><p align='center'><%= dataDayslength %></p></td>")
 
-    janela.document.write("</tr>")
+        janela.document.write("</tr>")
 
-    janela.document.write("</table>")
+        janela.document.write("</table>")
 
-    janela.document.write("<hr style='border: 2px black solid;'>  <br> <br> <br>  <p>Processsado por Computador em <%= datanow %>")
+        janela.document.write("<hr style='border: 2px black solid;'>  <br> <br> <br>  <p>Processsado por Computador em <%= datanow %>")
 
-    janela.print()
-  }
+        janela.print()
+    }
 </script>
 <%- include ("partials/footer.ejs") %>
