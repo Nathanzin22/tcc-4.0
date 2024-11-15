@@ -3,7 +3,7 @@ const pool = require("../../db/dbconexão")
 
 class fotoDao {
     async salvar(foto) {
-        const query = 'INSERT INTO  foto (nome, user_id) VALUES ($1, $2)';
+        const query = 'INSERT INTO foto (nome, user_id) VALUES ($1, $2)';
         const values = [foto.nome, foto.user_id];
         
         try {
