@@ -2,8 +2,8 @@ const pool =require("../../db/dbconexão")
 
 class RegistroTao{
     async salvar(registro){
-        const query = 'INSERT INTO registro (nome,  telefone, data,  horario, user_id) VALUES ($1, $2, $3, $4, $5)';
-        const values = [registro.nome, registro.telefone, registro.data, registro.horario, registro.user_id];
+        const query = 'INSERT INTO registro (nome,  telefone, data,  horario, user_id, obs) VALUES ($1, $2, $3, $4, $5, $6)';
+        const values = [registro.nome, registro.telefone, registro.data, registro.horario, registro.user_id, registro.obs];
 
     try {
         await pool.query(query, values)
