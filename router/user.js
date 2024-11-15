@@ -139,14 +139,15 @@ router.post("/reservas/atender", async (req, res) => {
     data: req.body.data,
     horario: req.body.horario,
     user_id: id,
-    datanow: hoje
+    datanow: hoje,
+    obs: req.body.obs
   }
   
   const eliminar = req.body.id
   await finalizado.salvar(data)
   
   await registroDao.deleteOne(eliminar);
-  
+
   res.redirect("/users/reservas")
 })
 
