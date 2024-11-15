@@ -63,6 +63,20 @@ async function createTables() {
       servico VARCHAR(255) NOT NULL,
       user_id INTEGER REFERENCES users(id)
     );
+    
+    DO $$
+    BEGIN
+      IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='registro' AND column_name='obs') THEN
+        ALTER TABLE public.registro ADD obs varchar(255) NULL;
+      END IF;
+    END $$;
+    
+    DO $$
+    BEGIN
+      IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='finalizado' AND column_name='obs') THEN
+        ALTER TABLE public.finalizado ADD obs varchar(255) NULL;
+      END IF;
+    END $$;
   `;
   
   try {
