@@ -13,10 +13,13 @@
         <div class="card-body">
             <form action="/reservar" method="post">
                 <label for="nome">Digite Nome</label>
-                <input type="text" id="nome" class="form-control" value="<%= user ? user.nome : '' %>" name="nome" disabled>
+                <input type="text" id="nome" class="form-control" value="<%= user ? user.nome : '' %>" name="nome" readonly>
 
                 <label for="telefone">Digite o Contato</label>
-                <input type="text" id="telefone" class="form-control" value="<%= user ? user.telefone : '' %>" name="telefone" disabled>
+                <input type="text" id="telefone" class="form-control" value="<%= user ? user.telefone : '' %>" name="telefone" readonly>
+
+                <label for="obs">Obervação da Reserva</label>
+                <textarea type="text" id="obs" class="form-control" name="obs"><%= user ? user.obs : '' %></textarea>
 
                 <h5 class="mt-1">Dados da Reserva</h5>
 
