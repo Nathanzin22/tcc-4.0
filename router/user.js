@@ -80,12 +80,16 @@ router.post("/agenda/editar", async (req, res) => {
 })
 //rotas de perfil
 router.get("/perfil/:id", async (req, res) => {
-    const {id} = req.user
-    var idi = req.params.id
-    const foto = await fotoDao.buscar(id)
-    
-    const user = await userDao.findById(idi)
-    res.render("perfil", {usuario: user, foto: foto})
+    try {
+        const {id} = req.user
+        var idi = req.params.id
+        const foto = await fotoDao.buscar(id)
+        
+        const user = await userDao.findById(idi)
+        res.render("perfil", {usuario: user, foto: foto})
+    } catch (error) {
+        res.redirect("/users/login");
+    }
 })
 
 
@@ -128,26 +132,30 @@ router.get("/editar/:id", async (req, res) => {
 })
 
 router.post("/reservas/atender", async (req, res) => {
-    const {id} = req.user
-    let datanow = Date()
-    let hoje = `${datanow[8]}${datanow[9]}/${datanow[4]}${datanow[5]}${datanow[6]}`
-    
-    const data = {
-        nome: req.body.nome,
-        telefone: req.body.telefone,
-        data: req.body.data,
-        horario: req.body.horario,
-        user_id: id,
-        datanow: hoje,
-        obs: req.body.obs
+    try {
+        const {id} = req.user
+        let datanow = Date()
+        let hoje = `${datanow[8]}${datanow[9]}/${datanow[4]}${datanow[5]}${datanow[6]}`
+        
+        const data = {
+            nome: req.body.nome,
+            telefone: req.body.telefone,
+            data: req.body.data,
+            horario: req.body.horario,
+            user_id: id,
+            datanow: hoje,
+            obs: req.body.obs
+        }
+        
+        const eliminar = req.body.id
+        await finalizado.salvar(data)
+        
+        await registroDao.deleteOne(eliminar);
+        
+        res.redirect("/users/reservas")
+    } catch (error) {
+        res.redirect("/users/login");
     }
-    
-    const eliminar = req.body.id
-    await finalizado.salvar(data)
-    
-    await registroDao.deleteOne(eliminar);
-    
-    res.redirect("/users/reservas")
 })
 
 router.get("/reservas/deletar2/:id", async (req, res) => {
@@ -215,18 +223,22 @@ NESTA  AREA ESTARÁ OS ROTAS DO TIPO POST
 //rotas de /perfil/foto
 
 router.post("/perfil/foto", upload.single('foto'), async (req, res) => {
-    const {id} = req.user
-    const nome = req.body.nome
-    
-    const foto = {
-        nome: req.file.filename,
-        user_id: id
+    try {
+        const {id} = req.user
+        const nome = req.body.nome
+        
+        const foto = {
+            nome: req.file.filename,
+            user_id: id
+        }
+        
+        await fotoDao.deletar(id)
+        await fotoDao.salvar(foto)
+        
+        res.redirect(`/users/perfil/${id}`)
+    } catch (error) {
+        res.redirect("/users/login");
     }
-    
-    await fotoDao.deletar(id)
-    await fotoDao.salvar(foto)
-    
-    res.redirect(`/users/perfil/${id}`)
 })
 
 router.post('/users', async (req, res) => {
@@ -293,11 +305,8 @@ router.post('/users', async (req, res) => {
                 });
             }
         }
-        
     } catch (error) {
-        console.error("Erro na criação de conta: ", error);
-        
-        res.redirect("/users/cadastrouser");
+        res.redirect("/users/login");
     }
 });
 
@@ -330,42 +339,46 @@ router.post("/editar", (req, res) => {
 })
 
 router.post("/redefinir/senha", async (req, res) => {
-    const {id} = req.user
-    const senha = req.body.senha
-    let senhaNova = req.body.senhaNova
-    
-    await userDao.findById(id).then((usuario) => {
-        if (!usuario) { //return done(null, false, {message: "Não existe uma conta com este número de Bilhete"})
-            req.flash("error_msg", "Não é possivel editar a senha")
-            res.redirect("/")
-        }
-        bcrypt.compare(senha, usuario.senha, (erro, batem) => {
-            if (batem) {
-                bcrypt.genSalt(8, (erro, salt) => {
-                    bcrypt.hash(senhaNova, salt, async (erro, hash) => {
-                        
-                        if (erro) {
-                            req.flash("error_msg", "houve um erro interno ")
-                            res.redirect("/")
-                        }
-                        senhaNova = hash;
-                        await userDao.editarSenha(senhaNova, id).then(() => {
-                            req.flash("success_msg", "Conta criada editada sucesso")
-                            
-                            res.redirect(`/users/editar/${id}`);
-                        }).catch((err) => {
-                            
-                            req.flash("error_msg", "Erro ao salvar no ", err);
-                            
-                        })
-                    })
-                })
-            } else {
-                req.flash("error_msg", "Senha Incorreta digite a senha antiga")
+    try {
+        const {id} = req.user
+        const senha = req.body.senha
+        let senhaNova = req.body.senhaNova
+        
+        await userDao.findById(id).then((usuario) => {
+            if (!usuario) { //return done(null, false, {message: "Não existe uma conta com este número de Bilhete"})
+                req.flash("error_msg", "Não é possivel editar a senha")
                 res.redirect("/")
             }
+            bcrypt.compare(senha, usuario.senha, (erro, batem) => {
+                if (batem) {
+                    bcrypt.genSalt(8, (erro, salt) => {
+                        bcrypt.hash(senhaNova, salt, async (erro, hash) => {
+                            
+                            if (erro) {
+                                req.flash("error_msg", "houve um erro interno ")
+                                res.redirect("/")
+                            }
+                            senhaNova = hash;
+                            await userDao.editarSenha(senhaNova, id).then(() => {
+                                req.flash("success_msg", "Conta criada editada sucesso")
+                                
+                                res.redirect(`/users/editar/${id}`);
+                            }).catch((err) => {
+                                
+                                req.flash("error_msg", "Erro ao salvar no ", err);
+                                
+                            })
+                        })
+                    })
+                } else {
+                    req.flash("error_msg", "Senha Incorreta digite a senha antiga")
+                    res.redirect("/")
+                }
+            })
         })
-    })
+    } catch (error) {
+        res.redirect("/users/login");
+    }
 })
 
 
@@ -462,7 +475,7 @@ router.post("/servicos", async (req, res) => {
         }
         res.redirect(`/users/servicos/${id}`)
     } catch (error) {
-        console.error("error ", error)
+        res.redirect("/users/login");
     }
 })
 
