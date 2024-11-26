@@ -1,6 +1,9 @@
 compiled output
 /dist
 /node_modules
+/public
+
+/db/dbconexão.js
 
 Logs
 logs
