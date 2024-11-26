@@ -164,7 +164,7 @@ app.post("/busca", async (req, res) => {
   for (let index = 0; index < data.length; index++) {
     const servico = await servicosDao.buscar(data[index]['user_id'])
     
-    data[index].servico = servico[0].servico
+    data[index].servico = servico[0]?.servico
   }
   
   const tag = await userDao.buscarTodosProfissao()
